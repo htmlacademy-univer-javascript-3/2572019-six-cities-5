@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './components/app/app.tsx';
+import {MainPageProps} from './pages/main-page/main-page.tsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const mainPageProps : MainPageProps = {
+  rentOffersCount: 312,
+  userName : 'Oliver.conner@gmail.com',
+  favoriteCount : 3,
+};
+
 root.render(
   <React.StrictMode>
-    <h1>Hello, World!</h1>
+    <App mainPageProps={mainPageProps}/>
   </React.StrictMode>
 );

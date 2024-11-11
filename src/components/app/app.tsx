@@ -6,18 +6,28 @@ import PrivateRoute from '../private-route/private-route.tsx';
 import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
 import OfferPage from '../../pages/offer-page/offer-page.tsx';
 import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
+import {OffersShort} from '../../types/offers/offer-short.ts';
+import {OffersDetailed} from '../../types/offers/offer-detailed.ts';
 
 type AppProps = {
   rentOffersCount: number;
+  offersShort: OffersShort;
+  offersDetailed: OffersDetailed;
+  allFavorites: OffersShort;
 }
 
-function App({rentOffersCount}: AppProps): JSX.Element {
+function App({rentOffersCount, offersShort, offersDetailed, allFavorites}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage rentOffersCount={rentOffersCount}/>}
+          element={
+            <MainPage
+              rentOffersCount={rentOffersCount}
+              offersShort={offersShort}
+            />
+          }
         />
         <Route
           path={AppRoute.Login}
@@ -27,14 +37,14 @@ function App({rentOffersCount}: AppProps): JSX.Element {
           path={AppRoute.Favourites}
           element={
             <PrivateRoute authorizationStatus={AuthStatus.NoAuth}>
-              <FavoritesPage/>
+              <FavoritesPage allFavorites={allFavorites}/>
             </PrivateRoute>
           }
         />
-        <Route
-          path={AppRoute.Offer}
-          element={<OfferPage/>}
-        />
+        <Route path={AppRoute.Offer}>
+          <Route index element={<NotFoundPage/>}/>
+          <Route path={':id'} element={<OfferPage offersDetailed={offersDetailed}/>}/>
+        </Route>
         <Route
           path='*'
           element={<NotFoundPage/>}

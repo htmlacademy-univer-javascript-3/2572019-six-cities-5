@@ -1,5 +1,7 @@
 import {OffersShort} from '../../types/offers/offer-short.ts';
-import FavoritePlaceCard from '../favorite-place-card/favorite-place-card.tsx';
+import OfferCard from '../offer/offer-card/offer-card.tsx';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const.ts';
 
 type FavoritesListElementProps = {
   favoritesAtCity: OffersShort;
@@ -11,14 +13,14 @@ function FavoritesListElement({favoritesAtCity, cityName}: FavoritesListElementP
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link" to={AppRoute.Main}>
             <span>{cityName}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">
         {favoritesAtCity.map((offer) => (
-          <FavoritePlaceCard key={offer.id} placeShortInfo={offer}/>
+          <OfferCard key={offer.id} placeShortInfo={offer} variant={'favorites'}/>
         ))}
       </div>
     </li>

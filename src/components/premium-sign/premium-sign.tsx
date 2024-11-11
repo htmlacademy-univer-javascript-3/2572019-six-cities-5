@@ -1,12 +1,19 @@
-type PremiumSignProps = {
-    show?: boolean;
-  }
+import {PremiumSignVariants} from '../../types/variants.ts';
 
-function PremiumSign({ show } : PremiumSignProps) : JSX.Element | null{
-  return !show ? null :
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>;
+type PremiumSignProps = {
+  show?: boolean;
+  variant: PremiumSignVariants;
+}
+
+function PremiumSign({ show, variant } : PremiumSignProps) {
+  const className = variant === 'card' ? 'place-card__mark' : 'offer__mark';
+  return (
+    show && (
+      <div className={className}>
+        <span>Premium</span>
+      </div>
+    )
+  );
 }
 
 export default PremiumSign;

@@ -1,16 +1,17 @@
-import LogoHeaderLeft from '../logo/logo-header-left.tsx';
+import LogoHeader from '../logo/logo-header.tsx';
 import HeaderNavigation from './header-navigation.tsx';
 
 type HeaderProps = {
   disableNav?: boolean;
+  isLogoActive?: boolean;
 }
 
-function Header({disableNav}: HeaderProps): JSX.Element {
+function Header({disableNav, isLogoActive}: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
-          <LogoHeaderLeft/>
+          <LogoHeader isActive={isLogoActive}/>
           {disableNav ? ' ' : <HeaderNavigation/>}
         </div>
       </div>

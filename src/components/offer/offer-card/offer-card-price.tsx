@@ -3,7 +3,7 @@ type PlaceCardPriceProps = {
     currencySymbol?: string;
   }
 
-function PlaceCardPrice({ price, currencySymbol = '€' } : PlaceCardPriceProps) : JSX.Element {
+function OfferCardPrice({ price, currencySymbol = '€' } : PlaceCardPriceProps) : JSX.Element {
   return (
     <div className="place-card__price">
       <b className="place-card__price-value">{`${currencySymbol}${price}`}</b>
@@ -12,4 +12,4 @@ function PlaceCardPrice({ price, currencySymbol = '€' } : PlaceCardPriceProps)
   );
 }
 
-export default PlaceCardPrice;
+export default OfferCardPrice;

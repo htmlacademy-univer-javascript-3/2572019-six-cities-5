@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
+import {AppRoute} from '../../../const.ts';
+import {capitalizeFirstLetter} from '../../../utils.ts';
 
 type PlaceCardTitleProps = {
   type: string;
@@ -7,8 +8,8 @@ type PlaceCardTitleProps = {
   id: string;
 }
 
-function PlaceCardTitle({ type, name, id } : PlaceCardTitleProps) : JSX.Element {
-  const capitalizeFirstLetter = (word: string) : string => word.charAt(0).toUpperCase() + word.slice(1);
+function OfferCardTitle({ type, name, id } : PlaceCardTitleProps) : JSX.Element {
+
 
   return (
     <>
@@ -20,4 +21,4 @@ function PlaceCardTitle({ type, name, id } : PlaceCardTitleProps) : JSX.Element 
   );
 }
 
-export default PlaceCardTitle;
+export default OfferCardTitle;

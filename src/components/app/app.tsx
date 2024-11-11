@@ -36,7 +36,7 @@ function App({rentOffersCount, offersShort, offersDetailed, allFavorites}: AppPr
         <Route
           path={AppRoute.Favourites}
           element={
-            <PrivateRoute authorizationStatus={AuthStatus.NoAuth}>
+            <PrivateRoute authorizationStatus={AuthStatus.Auth}>
               <FavoritesPage allFavorites={allFavorites}/>
             </PrivateRoute>
           }

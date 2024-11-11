@@ -1,7 +1,13 @@
 import Header from '../../components/header/header.tsx';
 import {OffersDetailed} from '../../types/offers/offer-detailed.ts';
 import {useParams} from 'react-router-dom';
-import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form.tsx';
+import PremiumSign from '../../components/premium-sign/premium-sign.tsx';
+import {capitalizeFirstLetter} from '../../utils.ts';
+import Rating from '../../components/rating/rating.tsx';
+import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx';
+import OfferGallery from '../../components/offer/offer-gallery.tsx';
+import OfferHost from '../../components/offer/offer-host.tsx';
+import OfferReviews from '../../components/offer/offer-reviews.tsx';
 
 type OfferPageProps = {
   offersDetailed: OffersDetailed;
@@ -25,42 +31,26 @@ function OfferPage({ offersDetailed } : OfferPageProps): JSX.Element | null {
       <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
-          <div className="offer__gallery-container container">
-            <div className="offer__gallery">
-              {currentOffer.images.map((imageLink) => (
-                <div key={imageLink} className="offer__image-wrapper">
-                  <img className="offer__image" src={imageLink} alt="Photo studio"/>
-                </div>
-              ))}
-            </div>
-          </div>
+          <OfferGallery images={currentOffer.images} />
 
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              <PremiumSign show={currentOffer.isPremium} variant={'full'} />
+
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   {currentOffer.title}
                 </h1>
-                <button className={'offer__bookmark-button button'.concat(!currentOffer.isFavorite ? '' : ' place-card__bookmark-button--active')} type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton variant={'full'}/>
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{width: `${20 * currentOffer.rating}%`}}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
+
+              <Rating value={currentOffer.rating} variant={'full'}>
                 <span className="offer__rating-value rating__value">{currentOffer.rating}</span>
-              </div>
+              </Rating>
+
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {currentOffer.type}
+                  {capitalizeFirstLetter(currentOffer.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {currentOffer.bedrooms} Bedrooms
@@ -83,58 +73,15 @@ function OfferPage({ offersDetailed } : OfferPageProps): JSX.Element | null {
                   ))}
                 </ul>
               </div>
-              <div className="offer__host">
-                <h2 className="offer__host-title">Meet the host</h2>
-                <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src={currentOffer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
-                  </div>
-                  <span className="offer__user-name">
-                    {currentOffer.host.name}
-                  </span>
-                  <span className="offer__user-status">
-                    {currentOffer.host.isPro ? 'Pro' : ''}
-                  </span>
-                </div>
-                <div className="offer__description">
-                  <p className="offer__text">
-                    {currentOffer.description}
-                  </p>
-                </div>
-              </div>
-              <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="/img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                        The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
-                <CommentSubmissionForm />
-              </section>
+
+              <OfferHost host={currentOffer.host} description={currentOffer.description}/>
+              <OfferReviews />
+
             </div>
           </div>
           <section className="offer__map map"></section>
         </section>
+
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>

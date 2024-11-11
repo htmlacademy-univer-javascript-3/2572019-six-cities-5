@@ -1,11 +1,11 @@
-import {Host} from './host.ts';
+import {User} from '../user.ts';
 import {OfferShort} from './offer-short.ts';
 
 export type OfferDetailed = Omit<OfferShort, 'previewImage'> & {
   description: string;
   bedrooms: number;
   goods: string[];
-  host: Host;
+  host: User;
   images: string[];
   maxAdults: number;
 }

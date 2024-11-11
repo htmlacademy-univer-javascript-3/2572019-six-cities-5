@@ -1,7 +1,7 @@
 import {RatingVariants} from '../types/variants.ts';
 
 const variantData = {
-  'card': {
+  card: {
     ratingClassName: 'place-card__rating rating',
     starsClassName: 'place-card__stars rating__stars',
   },

@@ -182,6 +182,46 @@ mockOffersDetailed.set(
   }
 );
 
+mockOffersDetailed.set(
+  '6c1eb8b4-a015-4238-8a75-d9f97e2a911a',
+  {
+    'id': '6c1eb8b4-a015-4238-8a75-d9f97e2a911a',
+    'title': 'The house among olive ',
+    'description': 'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',
+    'type': 'hotel',
+    'price': 206,
+    'images': [
+      'https://14.design.htmlacademy.pro/static/hotel/20.jpg',
+      'https://14.design.htmlacademy.pro/static/hotel/1.jpg',
+      'https://14.design.htmlacademy.pro/static/hotel/8.jpg',
+      'https://14.design.htmlacademy.pro/static/hotel/3.jpg',
+      'https://14.design.htmlacademy.pro/static/hotel/18.jpg',
+      'https://14.design.htmlacademy.pro/static/hotel/19.jpg'
+    ],
+    'city': mockCities[AvailableCities.Paris],
+    'location': {
+      'latitude': 48.837610000000005,
+      'longitude': 2.3454990000000002,
+      'zoom': 16
+    },
+    'goods': [
+      'Towels',
+      'Cable TV',
+      'Coffee machine'
+    ],
+    'host': {
+      'isPro': true,
+      'name': 'Angelina',
+      'avatarUrl': 'https://14.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
+    },
+    'isPremium': true,
+    'isFavorite': false,
+    'rating': 2.8,
+    'bedrooms': 2,
+    'maxAdults': 8
+  }
+);
+
 // ---------------------------- НИЖЕ - карточки для favorites
 
 mockOffersDetailed.set(

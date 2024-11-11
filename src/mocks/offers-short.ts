@@ -67,4 +67,20 @@ export const mockOffersShort: OffersShort = [
     isPremium: true,
     rating: 2.9
   },
+  {
+    id: '6c1eb8b4-a015-4238-8a75-d9f97e2a911a',
+    title: 'The house among olive ',
+    type: 'hotel',
+    price: 206,
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/6.jpg',
+    city: mockCities[AvailableCities.Paris],
+    location: {
+      latitude: 48.837610000000005,
+      longitude: 2.3454990000000002,
+      zoom: 16
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 2.8
+  },
 ];

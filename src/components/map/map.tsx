@@ -4,15 +4,18 @@ import useMap from '../../hooks/use-map.ts';
 import {Locations} from '../../types/location.ts';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {MapVariants} from '../../types/variants.ts';
 
 type MapProps = {
   city: City;
   points: Locations;
+  variant: MapVariants;
 };
 
-function Map({city, points} : MapProps) : JSX.Element {
+function Map({city, points, variant}: MapProps): JSX.Element {
+  const sectionClassName = variant === 'main' ? 'cities__map' : 'offer__map';
   const mapRef = useRef(null);
-  const map = useMap({mapRef, center:city.location});
+  const map = useMap({mapRef, center: city.location});
 
   useEffect(() => {
     if (map) {
@@ -25,7 +28,7 @@ function Map({city, points} : MapProps) : JSX.Element {
       });
     }
   }, [map, points]);
-  return <section className="cities__map map" ref={mapRef}></section>;
+  return <section className={sectionClassName} ref={mapRef}></section>;
 }
 
 export default Map;

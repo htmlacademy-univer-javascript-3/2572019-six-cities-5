@@ -4,17 +4,19 @@ import BookmarkButton from '../../bookmark-button/bookmark-button.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../../const.ts';
 import Rating from '../../rating/rating.tsx';
-import OfferCardPrice from './offer-card-price.tsx';
+import OfferPrice from '../offer-price.tsx';
 import OfferCardTitle from './offer-card-title.tsx';
 import {useOfferCard} from '../../../hooks/use-offer-card.ts';
 import {OfferCardVariants} from '../../../types/variants.ts';
+import {Nullable} from '../../../types/nullable.ts';
 
 type PlaceCardProps = {
   placeShortInfo: OfferShort;
   variant: OfferCardVariants;
+  onCardHover?: (id: Nullable<string>) => void;
 }
 
-function OfferCard({placeShortInfo, variant}: PlaceCardProps): JSX.Element {
+function OfferCard({placeShortInfo, variant, onCardHover}: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
@@ -35,7 +37,11 @@ function OfferCard({placeShortInfo, variant}: PlaceCardProps): JSX.Element {
   } = useOfferCard({variant});
 
   return (
-    <article className={placeCardClassName}>
+    <article
+      className={placeCardClassName}
+      onMouseEnter={() => onCardHover && onCardHover(id)}
+      onMouseLeave={() => onCardHover && onCardHover(null)}
+    >
       <PremiumSign show={isPremium} variant={'card'}/>
       <div className={imageWrapperClassName}>
         <Link to={`${AppRoute.Offer}/${id}`}>
@@ -50,7 +56,7 @@ function OfferCard({placeShortInfo, variant}: PlaceCardProps): JSX.Element {
       </div>
       <div className={cardInfoClassName}>
         <div className="place-card__price-wrapper">
-          <OfferCardPrice price={price}/>
+          <OfferPrice price={price} variant={'card'}/>
           <BookmarkButton inFavorites={isFavorite} variant={'card'}/>
         </div>
         <Rating value={rating} variant={'card'}/>

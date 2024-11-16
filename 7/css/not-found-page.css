@@ -1,0 +1,19 @@
+.page--not-found{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 40px;
+  }
+  
+  .page--not-found__to-main-button{
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    background-color: #4481c3;
+    transform: skew(-15deg);
+    &:hover{
+      opacity: .6;
+    }
+  }
+  

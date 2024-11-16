@@ -13,18 +13,20 @@ import Map from '../../components/map/map.tsx';
 import {mockCities} from '../../mocks/cities.ts';
 import {AvailableCities} from '../../const.ts';
 import OfferCardList from '../../components/offer/offer-card-list/offer-card-list.tsx';
-import {OffersShort} from '../../types/offers/offer-short.ts';
 import OfferFeatures from '../../components/offer/offer-features.tsx';
 import OfferInside from '../../components/offer/offer-inside.tsx';
+import {shuffleArray} from '../../utils.ts';
+import {mockOffersShort} from '../../mocks/offers-short.ts';
+import {Points} from '../../types/point.ts';
 
 type OfferPageProps = {
   offersDetailed: OffersDetailed;
-  nearbyOffers: OffersShort;
 }
 
-function OfferPage({offersDetailed, nearbyOffers}: OfferPageProps): JSX.Element | null {
+function OfferPage({offersDetailed,}: OfferPageProps): JSX.Element | null {
   const {id} = useParams();
-  const nearbyPoints = nearbyOffers.map(({location}) => location);
+  const nearbyOffers = shuffleArray(mockOffersShort);
+  const nearbyPoints : Points = nearbyOffers.map((offer) => ({id: offer.id, location: offer.location}));
 
   if (!id) {
     return null;
@@ -63,9 +65,9 @@ function OfferPage({offersDetailed, nearbyOffers}: OfferPageProps): JSX.Element 
               <OfferHost host={currentOffer.host} description={currentOffer.description}/>
               <OfferReviews reviews={mockReviews}/>
 
-            </div>
+            </div>`
           </div>
-          <Map city={mockCities[AvailableCities.Paris]} points={nearbyPoints} variant={'offer'}/>
+          <Map city={mockCities[AvailableCities.Paris]} points={nearbyPoints} variant={'offer'} selectedPoint={undefined}/>
         </section>
 
         <div className="container">

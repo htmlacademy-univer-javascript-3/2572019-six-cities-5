@@ -1,20 +1,16 @@
 import Header from '../../components/header/header.tsx';
 import CitiesTabs from '../../components/cities-tabs/cities-tabs.tsx';
-import {OffersShort} from '../../types/offers/offer-short.ts';
-import {mockCities} from '../../mocks/cities.ts';
 import Map from '../../components/map/map.tsx';
-import {AvailableCities} from '../../const.ts';
 import OfferCardList from '../../components/offer/offer-card-list/offer-card-list.tsx';
-import {City} from '../../types/city.ts';
+import {useAppSelector} from '../../hooks/redux.ts';
+import {Points} from '../../types/point.ts';
 
-export type MainPageProps = {
-  rentOffersCount: number;
-  offers: OffersShort;
-  city: City;
-}
+function MainPage(): JSX.Element {
+  const activeCity = useAppSelector((store) => store.activeCity);
+  const offers = useAppSelector((store) => store.offers);
+  const offersByCity = offers.filter((offer) => offer.city.name === activeCity.name);
+  const points : Points = offersByCity.map(({location, id}) => ({id, location}));
 
-function MainPage({rentOffersCount, offers, city} : MainPageProps): JSX.Element {
-  const points = offers.map(({location}) => location);
   return (
     <div className="page page--gray page--main">
       <Header isLogoActive/>
@@ -25,9 +21,9 @@ function MainPage({rentOffersCount, offers, city} : MainPageProps): JSX.Element 
 
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferCardList cityName={city.name} offers={offers} offersCount={rentOffersCount} variant={'main'} />
+            <OfferCardList cityName={activeCity.name} offers={offersByCity} offersCount={offersByCity.length} variant={'main'} />
             <div className="cities__right-section">
-              <Map city={mockCities[AvailableCities.Paris]} points={points} variant={'main'}/>
+              <Map city={activeCity} points={points} variant={'main'} selectedPoint={undefined}/>
             </div>
           </div>
         </div>

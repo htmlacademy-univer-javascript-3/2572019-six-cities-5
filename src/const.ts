@@ -11,7 +11,8 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favourites = '/favorites',
-  Offer = '/offer'
+  Offer = '/offer',
+  NotFound = '/not-found',
 }
 
 export enum AuthStatus {
@@ -22,5 +23,8 @@ export enum AuthStatus {
 
 export const Settings = {
   rentOffersCount: 312,
-  availableCities: Object.values(AvailableCities),
+  cityNames: Object.values(AvailableCities),
 };
+
+export const URL_MARKER_DEFAULT = './public/img/pin.svg';
+export const URL_MARKER_CURRENT = './public/img/pin-active.svg';

@@ -1,5 +1,5 @@
 import {OffersShort} from '../../types/offers/offer-short.ts';
-import {AvailableCities} from '../../const.ts';
+import {Settings} from '../../const.ts';
 import FavoritesListElement from './favorites-list-element.tsx';
 import {Fragment} from 'react';
 
@@ -8,7 +8,7 @@ type FavoritesListProps = {
 }
 
 function FavoritesList({ allFavorites } : FavoritesListProps) : JSX.Element {
-  const allAvailableCities = Object.keys(AvailableCities);
+  const allAvailableCities = Settings.cityNames;
   const cityFilteredFavorites =
     allAvailableCities
       .map((city) => (

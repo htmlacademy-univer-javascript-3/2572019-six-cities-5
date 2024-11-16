@@ -14,6 +14,12 @@ function useMap({mapRef, center}: MapController): Map | null {
   const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
+    if (map) {
+      map.setView({lat: center.latitude, lng: center.longitude}, center.zoom);
+    }
+  }, [map, center]);
+
+  useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = leaflet.map(mapRef.current, {
         center: {
@@ -36,7 +42,6 @@ function useMap({mapRef, center}: MapController): Map | null {
       isRenderedRef.current = true;
     }
   }, [mapRef, center]);
-
   return map;
 }
 

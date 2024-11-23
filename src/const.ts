@@ -1,3 +1,6 @@
+import {SortingOrder} from './types/sorting-order.ts';
+import {OfferShort} from './types/offers/offer-short.ts';
+
 export enum AvailableCities {
   Paris = 'Paris',
   Cologne = 'Cologne',
@@ -24,6 +27,12 @@ export enum AuthStatus {
 export const Settings = {
   rentOffersCount: 312,
   cityNames: Object.values(AvailableCities),
+};
+
+export const SortComparers = {
+  [SortingOrder.priceToHigh]: (a: OfferShort, b: OfferShort) => a.price - b.price,
+  [SortingOrder.priceToLow]: (a: OfferShort, b: OfferShort) => b.price - a.price,
+  [SortingOrder.topRated]: (a: OfferShort, b: OfferShort) => b.rating - a.rating,
 };
 
 export const URL_MARKER_DEFAULT = './public/img/pin.svg';

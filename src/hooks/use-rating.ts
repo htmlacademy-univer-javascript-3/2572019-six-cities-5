@@ -22,6 +22,6 @@ type RatingController = {
 
 export function useRating({value, variant} : RatingController) {
   const {ratingClassName, starsClassName} = variantData[variant];
-  const width = `${20 * value}%`;
+  const width = `${20 * Math.round(value)}%`;
   return {ratingClassName, starsClassName, width};
 }

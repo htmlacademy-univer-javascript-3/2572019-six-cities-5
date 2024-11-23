@@ -48,7 +48,7 @@ mockOffersDetailed.set(
     },
     'isPremium': true,
     'isFavorite': false,
-    'rating': 2.9,
+    'rating': 4.9,
     'bedrooms': 5,
     'maxAdults': 7
   });

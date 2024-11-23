@@ -67,7 +67,7 @@ function OfferPage({offersDetailed,}: OfferPageProps): JSX.Element | null {
 
             </div>`
           </div>
-          <Map city={mockCities[AvailableCities.Paris]} points={nearbyPoints} variant={'offer'} selectedPoint={undefined}/>
+          <Map city={mockCities[AvailableCities.Paris]} points={nearbyPoints} variant={'offer'} selectedPointId={null}/>
         </section>
 
         <div className="container">

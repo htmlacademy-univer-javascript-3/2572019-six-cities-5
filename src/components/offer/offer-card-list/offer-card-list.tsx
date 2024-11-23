@@ -3,8 +3,9 @@ import {OfferCardListVariants} from '../../../types/variants.ts';
 import DropdownOffersFilter from '../../dropdown-offers-filter/dropdown-offers-filter.tsx';
 import OfferCardListContainer from './offer-card-list-container.tsx';
 import {useOfferCardList} from '../../../hooks/use-offer-card-list.ts';
-import {useState} from 'react';
 import {Nullable} from '../../../types/nullable.ts';
+import {useDispatch} from 'react-redux';
+import {setHoverCardId} from '../../../store/actions.ts';
 
 type OfferCardListProps = {
   cityName: string;
@@ -14,8 +15,9 @@ type OfferCardListProps = {
 }
 
 function OfferCardList({cityName, offers, variant, offersCount}: OfferCardListProps) {
-  const [, setHoverCard] = useState<Nullable<string>>(null);
-  const handleHoverCard = (id: Nullable<string>) => setHoverCard(id);
+  const dispatch = useDispatch();
+  const handleHoverCard = (id: Nullable<string>) => dispatch(setHoverCardId(id));
+
   const {
     sectionClassName,
     headerClassName,
@@ -25,6 +27,7 @@ function OfferCardList({cityName, offers, variant, offersCount}: OfferCardListPr
     isFormActive,
     containerClassName,
   } = useOfferCardList({variant});
+
   return (
     <section className={sectionClassName}>
       {isHeaderActive && <h2 className={headerClassName}>{headerContent}</h2>}

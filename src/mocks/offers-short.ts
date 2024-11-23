@@ -17,7 +17,7 @@ export const mockOffersShort: OffersShort = [
     },
     isFavorite: false,
     isPremium: true,
-    rating: 2.9
+    rating: 4.9
   },
   {
     id: 'df5b1430-63fb-4033-b6b4-b9164930c5ee',
@@ -82,5 +82,21 @@ export const mockOffersShort: OffersShort = [
     isFavorite: false,
     isPremium: true,
     rating: 2.8
+  },
+  {
+    id: '8b95bdf2-0607-4986-a0a2-7bdf9e86273f',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'house',
+    price: 323,
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/17.jpg',
+    city: mockCities[AvailableCities.Cologne],
+    location: {
+      'latitude': 50.950361,
+      'longitude': 6.961974,
+      'zoom': 16
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 3.8
   },
 ];

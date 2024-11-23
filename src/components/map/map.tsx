@@ -5,12 +5,13 @@ import leaflet, {Icon, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {MapVariants} from '../../types/variants.ts';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const.ts';
-import {Point, Points} from '../../types/point.ts';
+import {Points} from '../../types/point.ts';
+import {Nullable} from '../../types/nullable.ts';
 
 type MapProps = {
   city: City;
   points: Points;
-  selectedPoint: Point | undefined;
+  selectedPointId: Nullable<string>;
   variant: MapVariants;
 };
 
@@ -23,10 +24,10 @@ const defaultCustomIcon = new Icon({
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
   iconSize: [27, 39],
-  iconAnchor: [2, 4]
+  iconAnchor: [20, 40]
 });
 
-function Map({city, points, selectedPoint, variant}: MapProps): JSX.Element {
+function Map({city, points, selectedPointId, variant}: MapProps): JSX.Element {
   const sectionClassName = variant === 'main' ? 'cities__map' : 'offer__map';
   const mapRef = useRef(null);
   const map = useMap({mapRef, center: city.location});
@@ -45,7 +46,7 @@ function Map({city, points, selectedPoint, variant}: MapProps): JSX.Element {
 
         marker
           .setIcon(
-            selectedPoint !== undefined && point.id === selectedPoint.id
+            selectedPointId && point.id === selectedPointId
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -58,7 +59,7 @@ function Map({city, points, selectedPoint, variant}: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, markers, selectedPoint]);
+  }, [map, points, markers, selectedPointId]);
   return <section className={sectionClassName} ref={mapRef}></section>;
 }
 

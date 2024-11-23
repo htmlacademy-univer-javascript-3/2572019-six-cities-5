@@ -6,9 +6,11 @@ import {useAppSelector} from '../../hooks/redux.ts';
 import {Points} from '../../types/point.ts';
 
 function MainPage(): JSX.Element {
+  // const dispatch = useDispatch();
+  const hoverCardId = useAppSelector((store) => store.hoverCardId);
   const activeCity = useAppSelector((store) => store.activeCity);
-  const offers = useAppSelector((store) => store.offers);
-  const offersByCity = offers.filter((offer) => offer.city.name === activeCity.name);
+  const offersRaw = useAppSelector((store) => store.offers);
+  const offersByCity = offersRaw.filter((offer) => offer.city.name === activeCity.name);
   const points : Points = offersByCity.map(({location, id}) => ({id, location}));
 
   return (
@@ -23,7 +25,7 @@ function MainPage(): JSX.Element {
           <div className="cities__places-container container">
             <OfferCardList cityName={activeCity.name} offers={offersByCity} offersCount={offersByCity.length} variant={'main'} />
             <div className="cities__right-section">
-              <Map city={activeCity} points={points} variant={'main'} selectedPoint={undefined}/>
+              <Map city={activeCity} points={points} variant={'main'} selectedPointId={hoverCardId}/>
             </div>
           </div>
         </div>

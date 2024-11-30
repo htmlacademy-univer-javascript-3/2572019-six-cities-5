@@ -4,8 +4,8 @@ import DropdownOffersFilter from '../../dropdown-offers-filter/dropdown-offers-f
 import OfferCardListContainer from './offer-card-list-container.tsx';
 import {useOfferCardList} from '../../../hooks/use-offer-card-list.ts';
 import {Nullable} from '../../../types/nullable.ts';
-import {useDispatch} from 'react-redux';
 import {setHoverCardId} from '../../../store/actions.ts';
+import {useAppDispatch} from '../../../hooks/redux.ts';
 
 type OfferCardListProps = {
   cityName: string;
@@ -15,7 +15,7 @@ type OfferCardListProps = {
 }
 
 function OfferCardList({cityName, offers, variant, offersCount}: OfferCardListProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleHoverCard = (id: Nullable<string>) => dispatch(setHoverCardId(id));
 
   const {

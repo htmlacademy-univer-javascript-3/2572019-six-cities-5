@@ -2,9 +2,9 @@ import {OffersShort} from '../../types/offers/offer-short.ts';
 import OfferCard from '../offer/offer-card/offer-card.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
-import {useDispatch} from 'react-redux';
 import {setActiveCity} from '../../store/actions.ts';
 import {getCityObjectByName} from '../../utils.ts';
+import {useAppDispatch} from '../../hooks/redux.ts';
 
 type FavoritesListElementProps = {
   favoritesAtCity: OffersShort;
@@ -12,7 +12,7 @@ type FavoritesListElementProps = {
 }
 
 function FavoritesListElement({favoritesAtCity, cityName}: FavoritesListElementProps): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleLinkOnClick = () => {
     const city = getCityObjectByName(cityName);
     if (city) {

@@ -10,3 +10,5 @@ export const setHoverCardId = createAction<Nullable<string>>('setHooverCardId');
 export const setSortingOrder = createAction<SortingOrder>('setSortingOrder');
 
 export const setOffers = createAction<OffersShort>('setOffers');
+
+export const setOffersLoading = createAction<boolean>('setOffersLoading');

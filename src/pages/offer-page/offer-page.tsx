@@ -7,17 +7,13 @@ import BookmarkButton from '../../components/bookmark-button/bookmark-button.tsx
 import OfferGallery from '../../components/offer/offer-gallery.tsx';
 import OfferHost from '../../components/offer/offer-host.tsx';
 import OfferReviews from '../../components/offer/offer-reviews.tsx';
-import {mockReviews} from '../../mocks/reviews.ts';
 import OfferPrice from '../../components/offer/offer-price.tsx';
 import Map from '../../components/map/map.tsx';
-import {mockCities} from '../../mocks/cities.ts';
-import {AvailableCities} from '../../const.ts';
 import OfferCardList from '../../components/offer/offer-card-list/offer-card-list.tsx';
 import OfferFeatures from '../../components/offer/offer-features.tsx';
 import OfferInside from '../../components/offer/offer-inside.tsx';
-import {shuffleArray} from '../../utils.ts';
-import {mockOffersShort} from '../../mocks/offers-short.ts';
 import {Points} from '../../types/point.ts';
+import {OffersShort} from '../../types/offers/offer-short.ts';
 
 type OfferPageProps = {
   offersDetailed: OffersDetailed;
@@ -25,7 +21,7 @@ type OfferPageProps = {
 
 function OfferPage({offersDetailed,}: OfferPageProps): JSX.Element | null {
   const {id} = useParams();
-  const nearbyOffers = shuffleArray(mockOffersShort);
+  const nearbyOffers : OffersShort = [];
   const nearbyPoints : Points = nearbyOffers.map((offer) => ({id: offer.id, location: offer.location}));
 
   if (!id) {
@@ -63,11 +59,11 @@ function OfferPage({offersDetailed,}: OfferPageProps): JSX.Element | null {
               <OfferPrice price={currentOffer.price} variant={'full'}/>
               <OfferInside offer={currentOffer}/>
               <OfferHost host={currentOffer.host} description={currentOffer.description}/>
-              <OfferReviews reviews={mockReviews}/>
+              <OfferReviews reviews={[]}/>
 
-            </div>`
+            </div>
           </div>
-          <Map city={mockCities[AvailableCities.Paris]} points={nearbyPoints} variant={'offer'} selectedPointId={null}/>
+          <Map city={currentOffer.city} points={nearbyPoints} variant={'offer'} selectedPointId={null}/>
         </section>
 
         <div className="container">

@@ -1,15 +1,14 @@
-import {useAppSelector} from '../../hooks/redux.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux.ts';
 import {SortingOrder} from '../../types/sorting-order.ts';
 import DropdownOffersFilterOption from './dropdown-offers-filter-option.tsx';
 import {useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
 import {setOffers} from '../../store/actions.ts';
 import {SortComparers} from '../../const.ts';
-import {mockOffersShort} from '../../mocks/offers-short.ts';
+import {fetchOffers} from '../../store/api-actions.ts';
 
 
 function DropdownOffersFilter() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const offers = useAppSelector((store) => store.offers);
   const currentSortingOrder = useAppSelector((store) => store.sortingOrder);
   const [dropdownIsOpen, setDropdownIsOpen] = useState<boolean>(false);
@@ -17,13 +16,12 @@ function DropdownOffersFilter() {
   const handleSortingOnClick = () => setDropdownIsOpen((value) => !value);
 
   useEffect(() => {
-    if (currentSortingOrder === SortingOrder.popular) {
-      dispatch(setOffers(mockOffersShort));
-    } else {
+    if (currentSortingOrder === SortingOrder.popular && offers.length !== 0) {
+      dispatch(fetchOffers());
+    } else if (offers.length !== 0) {
       dispatch(setOffers(offers.toSorted(SortComparers[currentSortingOrder])));
-      // dispatch(setOffers(mockOffersShort));
     }
-  }, [currentSortingOrder, offers]);
+  }, [currentSortingOrder]);
 
   return (
     <form className="places__sorting" action="#" method="get">

@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 import classNames from 'classnames';
-import {useDispatch} from 'react-redux';
 import {setActiveCity} from '../../store/actions.ts';
 import {City} from '../../types/city.ts';
+import {useAppDispatch} from '../../hooks/redux.ts';
 
 type CityTabProps = {
   city: City;
@@ -11,7 +11,7 @@ type CityTabProps = {
 }
 
 function CityTab({city, isActive}: CityTabProps): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleTabClick = () => dispatch(setActiveCity(city));
   const linkClassName = classNames('locations__item-link tabs__item', {'tabs__item--active': isActive});
   return (

@@ -6,7 +6,6 @@ import {useAppSelector} from '../../hooks/redux.ts';
 import {Points} from '../../types/point.ts';
 
 function MainPage(): JSX.Element {
-  // const dispatch = useDispatch();
   const hoverCardId = useAppSelector((store) => store.hoverCardId);
   const activeCity = useAppSelector((store) => store.activeCity);
   const offersRaw = useAppSelector((store) => store.offers);

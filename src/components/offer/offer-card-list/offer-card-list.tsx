@@ -32,7 +32,7 @@ function OfferCardList({cityName, offers, variant, offersCount}: OfferCardListPr
     <section className={sectionClassName}>
       {isHeaderActive && <h2 className={headerClassName}>{headerContent}</h2>}
       {isFoundActive && <b className="places__found">{offersCount} places to stay in {cityName}</b>}
-      {isFormActive && <DropdownOffersFilter/>}
+      {isFormActive && <DropdownOffersFilter />}
       <OfferCardListContainer offers={offers} className={containerClassName} onCardHover={handleHoverCard}/>
     </section>
   );

@@ -6,23 +6,16 @@ import PrivateRoute from '../private-route/private-route.tsx';
 import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
 import OfferPage from '../../pages/offer-page/offer-page.tsx';
 import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
-import {OffersShort} from '../../types/offers/offer-short.ts';
-import {OffersDetailed} from '../../types/offers/offer-detailed.ts';
 import {useAppSelector} from '../../hooks/redux.ts';
 import LoadingSpinner from '../loading-spinner/loading-spinner.tsx';
 
-type AppProps = {
-  offersDetailed: OffersDetailed;
-  allFavorites: OffersShort;
-}
-
-function App({offersDetailed, allFavorites}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
-
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
     <>
-      {isOffersLoading && <LoadingSpinner/>}
+      {(isOffersLoading || authStatus === AuthStatus.Unknown) && <LoadingSpinner/>}
       <BrowserRouter>
         <Routes>
           <Route
@@ -38,15 +31,15 @@ function App({offersDetailed, allFavorites}: AppProps): JSX.Element {
           <Route
             path={AppRoute.Favourites}
             element={
-              <PrivateRoute authorizationStatus={AuthStatus.Auth}>
-                <FavoritesPage allFavorites={allFavorites}/>
+              <PrivateRoute>
+                <FavoritesPage />
               </PrivateRoute>
             }
           />
           <Route path={AppRoute.Offer}>
             <Route index element={<NotFoundPage/>}/>
             <Route path={':id'}
-              element={<OfferPage offersDetailed={offersDetailed}/>}
+              element={<OfferPage />}
             />
           </Route>
           <Route

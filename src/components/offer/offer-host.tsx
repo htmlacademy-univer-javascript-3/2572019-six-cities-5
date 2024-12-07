@@ -1,7 +1,7 @@
-import {User} from '../../types/user.ts';
+import {UserData} from '../../types/user-data.ts';
 
 type OfferHostProps = {
-  host: User;
+  host: UserData;
   description: string;
 }
 

@@ -4,20 +4,19 @@ import DropdownOffersFilterOption from './dropdown-offers-filter-option.tsx';
 import {useEffect, useState} from 'react';
 import {setOffers} from '../../store/actions.ts';
 import {SortComparers} from '../../const.ts';
-import {fetchOffers} from '../../store/api-actions.ts';
-
+import {fetchOffersAction} from '../../store/api-actions.ts';
 
 function DropdownOffersFilter() {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((store) => store.offers);
-  const currentSortingOrder = useAppSelector((store) => store.sortingOrder);
+  const offers = useAppSelector((state) => state.offers);
+  const currentSortingOrder = useAppSelector((state) => state.sortingOrder);
   const [dropdownIsOpen, setDropdownIsOpen] = useState<boolean>(false);
 
   const handleSortingOnClick = () => setDropdownIsOpen((value) => !value);
 
   useEffect(() => {
     if (currentSortingOrder === SortingOrder.popular && offers.length !== 0) {
-      dispatch(fetchOffers());
+      dispatch(fetchOffersAction());
     } else if (offers.length !== 0) {
       dispatch(setOffers(offers.toSorted(SortComparers[currentSortingOrder])));
     }

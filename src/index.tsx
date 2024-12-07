@@ -3,21 +3,22 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app.tsx';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import {fetchOffers} from './store/api-actions.ts';
+import {checkAuthStatusAction, fetchOffersAction} from './store/api-actions.ts';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-store.dispatch(fetchOffers());
+store.dispatch(checkAuthStatusAction());
+store.dispatch(fetchOffersAction());
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App
-        offersDetailed={new Map()}
-        allFavorites={[]}
-      />
+      <ToastContainer />
+      <App />
     </Provider>
   </React.StrictMode>
 );

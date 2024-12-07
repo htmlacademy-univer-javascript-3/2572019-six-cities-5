@@ -1,5 +1,4 @@
 import Header from '../../components/header/header.tsx';
-import {OffersDetailed} from '../../types/offers/offer-detailed.ts';
 import {useParams} from 'react-router-dom';
 import PremiumSign from '../../components/premium-sign/premium-sign.tsx';
 import Rating from '../../components/rating/rating.tsx';
@@ -14,21 +13,52 @@ import OfferFeatures from '../../components/offer/offer-features.tsx';
 import OfferInside from '../../components/offer/offer-inside.tsx';
 import {Points} from '../../types/point.ts';
 import {OffersShort} from '../../types/offers/offer-short.ts';
+import {OfferDetailed} from '../../types/offers/offer-detailed.ts';
+import {CityName} from '../../const.ts';
 
-type OfferPageProps = {
-  offersDetailed: OffersDetailed;
-}
-
-function OfferPage({offersDetailed,}: OfferPageProps): JSX.Element | null {
+function OfferPage(): JSX.Element | null {
   const {id} = useParams();
-  const nearbyOffers : OffersShort = [];
-  const nearbyPoints : Points = nearbyOffers.map((offer) => ({id: offer.id, location: offer.location}));
+  const nearbyOffers: OffersShort = [];
+  const nearbyPoints: Points = nearbyOffers.map((offer) => ({id: offer.id, location: offer.location}));
 
   if (!id) {
     return null;
   }
 
-  const currentOffer = offersDetailed.get(id);
+  const currentOffer: OfferDetailed = {
+    id: 'string',
+    title: 'string',
+    type: 'string',
+    price: 0,
+    city: {
+      name: CityName.Amsterdam,
+      location: {
+        latitude: 0,
+        longitude: 0,
+        zoom: 0,
+      }
+    },
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 0,
+    description: 'string',
+    bedrooms: 1,
+    goods: [''],
+    host: {
+      name: 'string',
+      avatarUrl: 'string',
+      isPro: false,
+      email: 'string',
+      token: 'string'
+    },
+    images: [''],
+    maxAdults: 1,
+  };
 
   if (!currentOffer) {
     return null;

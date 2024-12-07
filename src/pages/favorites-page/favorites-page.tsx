@@ -2,13 +2,8 @@ import Header from '../../components/header/header.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 import FavoritesList from '../../components/favorites-list/favorites-list.tsx';
-import {OffersShort} from '../../types/offers/offer-short.ts';
 
-type FavoritesPageProps = {
-  allFavorites: OffersShort;
-}
-
-function FavoritesPage({ allFavorites } : FavoritesPageProps) : JSX.Element {
+function FavoritesPage() : JSX.Element {
   return (
     <div className="page">
       <Header />
@@ -16,7 +11,7 @@ function FavoritesPage({ allFavorites } : FavoritesPageProps) : JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList allFavorites={allFavorites} />
+            <FavoritesList allFavorites={[]} />
           </section>
         </div>
       </main>

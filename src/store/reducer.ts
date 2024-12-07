@@ -1,11 +1,19 @@
-import {CityObject} from '../const.ts';
+import {AuthStatus, CityObject} from '../const.ts';
 import {OffersShort} from '../types/offers/offer-short.ts';
 import {createReducer} from '@reduxjs/toolkit';
-import {setActiveCity, setHoverCardId, setOffers, setOffersLoading, setSortingOrder} from './actions.ts';
+import {
+  setActiveCity,
+  setAuthStatus,
+  setHoverCardId,
+  setOffers,
+  setOffersLoading,
+  setSortingOrder, setUserData
+} from './actions.ts';
 import {City} from '../types/city.ts';
 import {Nullable} from '../types/nullable.ts';
 import {SortingOrder} from '../types/sorting-order.ts';
-import {fetchOffers} from './api-actions.ts';
+import {fetchOffersAction} from './api-actions.ts';
+import {UserData} from '../types/user-data.ts';
 
 type AppState = {
   activeCity: City;
@@ -13,6 +21,8 @@ type AppState = {
   hoverCardId: Nullable<string>;
   sortingOrder: SortingOrder;
   isOffersLoading: boolean;
+  authorizationStatus: AuthStatus;
+  userData: Nullable<UserData>;
 }
 
 const initialState : AppState = {
@@ -21,6 +31,8 @@ const initialState : AppState = {
   hoverCardId: null,
   sortingOrder: SortingOrder.popular,
   isOffersLoading: false,
+  authorizationStatus: AuthStatus.Unknown,
+  userData: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -37,10 +49,16 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(setOffers, (state, action) => {
       state.offers = action.payload;
     })
-    .addCase(fetchOffers.fulfilled, (state, action) => {
+    .addCase(fetchOffersAction.fulfilled, (state, action) => {
       state.offers = action.payload;
     })
     .addCase(setOffersLoading, (state, action) => {
       state.isOffersLoading = action.payload;
+    })
+    .addCase(setAuthStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserData, (state, action) => {
+      state.userData = action.payload;
     });
 });

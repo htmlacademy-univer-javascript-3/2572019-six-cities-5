@@ -10,21 +10,18 @@ import {useAuthorization} from '../../hooks/use-authorization.ts';
 function LoginPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const cities = Object.values(CityObject);
-  const chosenCity = cities[Math.floor(Math.random() * cities.length)];
-
   const isAuthorized = useAuthorization();
+
+  const cityButtonName = Object.values(CityObject)[Math.floor(Math.random() * 6)];
 
   if (isAuthorized) {
     navigate(AppRoute.Main);
   }
 
   const handleLinkOnClick = () => {
-    dispatch(setActiveCity(chosenCity));
+    dispatch(setActiveCity(cityButtonName));
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -83,7 +80,7 @@ function LoginPage(): JSX.Element {
                 to={AppRoute.Main}
                 onClick={handleLinkOnClick}
               >
-                <span>{chosenCity.name}</span>
+                <span>{cityButtonName.name}</span>
               </Link>
             </div>
           </section>

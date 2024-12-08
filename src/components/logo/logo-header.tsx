@@ -8,6 +8,7 @@ type LogoHeaderProps = {
 
 function LogoHeader({isActive} : LogoHeaderProps) : JSX.Element {
   const className = classNames('header__logo-link' , {'header__logo-link--active' : isActive});
+
   return (
     <div className="header__left">
       <Link to={AppRoute.Main} className={className}>

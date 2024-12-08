@@ -18,6 +18,7 @@ function ReviewRatingInput({ratingValue, onRateChange}: ReviewRatingInputProps) 
     <div className="reviews__rating-form form__rating">
       {
         rates.map(({value, title}) => {
+          value = 6 - value;
           const id = `${value}-stars`;
           return (
             <Fragment key={title}>

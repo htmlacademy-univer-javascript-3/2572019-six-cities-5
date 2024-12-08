@@ -80,6 +80,8 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Nearby = '/nearby',
+  Comments = '/comments',
 }
 
 export const SortComparers : Record<SortingOrder, (a: OfferShort, b: OfferShort) => number> = {

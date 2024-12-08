@@ -12,55 +12,39 @@ import OfferCardList from '../../components/offer/offer-card-list/offer-card-lis
 import OfferFeatures from '../../components/offer/offer-features.tsx';
 import OfferInside from '../../components/offer/offer-inside.tsx';
 import {Points} from '../../types/point.ts';
-import {OffersShort} from '../../types/offers/offer-short.ts';
-import {OfferDetailed} from '../../types/offers/offer-detailed.ts';
-import {CityName} from '../../const.ts';
+import {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux.ts';
+import {fetchNearPlacesAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions.ts';
+import {RequestStatus} from '../../types/request-status.ts';
+import {redirectToRoute} from '../../store/actions.ts';
+import {AppRoute} from '../../const.ts';
+
 
 function OfferPage(): JSX.Element | null {
   const {id} = useParams();
-  const nearbyOffers: OffersShort = [];
-  const nearbyPoints: Points = nearbyOffers.map((offer) => ({id: offer.id, location: offer.location}));
+  const dispatch = useAppDispatch();
+  const nearbyOffers = useAppSelector((state) => state.nearPlaces);
+  const currentOffer = useAppSelector((state) => state.offerDetailed);
+  const requestStatus = useAppSelector((state) => state.requestStatus);
+  const reviews = useAppSelector((state) => state.reviews);
+  const nearbyPoints: Points = nearbyOffers
+    .slice(0, 3)
+    .map((offer) => ({id: offer.id, location: offer.location}));
 
-  if (!id) {
-    return null;
+  if (requestStatus === RequestStatus.Error) {
+    dispatch(redirectToRoute(AppRoute.NotFound));
   }
 
-  const currentOffer: OfferDetailed = {
-    id: 'string',
-    title: 'string',
-    type: 'string',
-    price: 0,
-    city: {
-      name: CityName.Amsterdam,
-      location: {
-        latitude: 0,
-        longitude: 0,
-        zoom: 0,
-      }
-    },
-    location: {
-      latitude: 0,
-      longitude: 0,
-      zoom: 0,
-    },
-    isFavorite: false,
-    isPremium: false,
-    rating: 0,
-    description: 'string',
-    bedrooms: 1,
-    goods: [''],
-    host: {
-      name: 'string',
-      avatarUrl: 'string',
-      isPro: false,
-      email: 'string',
-      token: 'string'
-    },
-    images: [''],
-    maxAdults: 1,
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (id) {
+      dispatch(fetchOfferAction(id));
+      dispatch(fetchNearPlacesAction(id));
+      dispatch(fetchReviewsAction(id));
+    }
+  }, [id, dispatch]);
 
-  if (!currentOffer) {
+  if (!currentOffer || !id) {
     return null;
   }
 
@@ -89,11 +73,22 @@ function OfferPage(): JSX.Element | null {
               <OfferPrice price={currentOffer.price} variant={'full'}/>
               <OfferInside offer={currentOffer}/>
               <OfferHost host={currentOffer.host} description={currentOffer.description}/>
-              <OfferReviews reviews={[]}/>
+              <OfferReviews
+                reviewsCount={reviews.length}
+                reviews={reviews
+                  .toSorted((a, b) => (
+                    new Date(b.date).getTime() - new Date(a.date).getTime()))
+                  .slice(0, 10)}
+              />
 
             </div>
           </div>
-          <Map city={currentOffer.city} points={nearbyPoints} variant={'offer'} selectedPointId={null}/>
+          <Map
+            city={currentOffer.city}
+            points={nearbyPoints.concat([{id: currentOffer.id, location: currentOffer.location}])}
+            variant={'offer'}
+            selectedPointId={currentOffer.id}
+          />
         </section>
 
         <div className="container">

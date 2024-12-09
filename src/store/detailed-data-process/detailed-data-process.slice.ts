@@ -5,7 +5,7 @@ import {
   fetchNearPlacesAction,
   fetchOfferAction,
   fetchReviewsAction,
-  postReviewAction
+  postReviewAction, toggleOfferFavoriteStatus
 } from '../api-actions.ts';
 
 const initialState: DetailedDataProcess = {
@@ -38,6 +38,17 @@ export const detailedDataProcess = createSlice(
         })
         .addCase(postReviewAction.fulfilled, (state, action) => {
           state.reviews = state.reviews.concat([action.payload]);
+        })
+        .addCase(toggleOfferFavoriteStatus.fulfilled, (state, action) => {
+          const newOffer = action.payload;
+          if (state.offerDetailed?.id === newOffer.id) {
+            state.offerDetailed.isFavorite = newOffer.isFavorite;
+          }
+
+          const nearOffersIndex = state.nearPlaces.findIndex((offer) => offer.id === newOffer.id);
+          if (nearOffersIndex > -1) {
+            state.nearPlaces[nearOffersIndex].isFavorite = newOffer.isFavorite;
+          }
         });
     }
   }

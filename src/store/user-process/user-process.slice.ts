@@ -1,7 +1,7 @@
 import {UserProcess} from '../../types/state.ts';
 import {AuthStatus, StoreNameSpace} from '../../const.ts';
 import {createSlice} from '@reduxjs/toolkit';
-import {checkAuthStatusAction, loginAction, logoutAction} from '../api-actions.ts';
+import {fetchUserData, loginAction, logoutAction} from '../api-actions.ts';
 
 const initialState: UserProcess = {
   authorizationStatus: AuthStatus.Unknown,
@@ -14,14 +14,14 @@ export const userProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkAuthStatusAction.fulfilled, (state, action) => {
+      .addCase(fetchUserData.fulfilled, (state, action) => {
         state.authorizationStatus = AuthStatus.Auth;
         state.userData = action.payload;
       })
-      .addCase(checkAuthStatusAction.pending, (state) => {
+      .addCase(fetchUserData.pending, (state) => {
         state.authorizationStatus = AuthStatus.Unknown;
       })
-      .addCase(checkAuthStatusAction.rejected, (state) => {
+      .addCase(fetchUserData.rejected, (state) => {
         state.authorizationStatus = AuthStatus.NoAuth;
         state.userData = null;
       })

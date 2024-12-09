@@ -1,8 +1,7 @@
 import {useAppDispatch, useAppSelector} from '../services/redux.ts';
 import {useEffect, useState} from 'react';
-import {SortingOrder} from '../../types/sorting-order.ts';
 import {fetchOffersAction} from '../../store/api-actions.ts';
-import {SortComparisons} from '../../const.ts';
+import {SortComparisons, SortingOrder} from '../../const.ts';
 import {getOffers, getSortingOrder} from '../../store/data-process/data-process.selectors.ts';
 import {setOffers} from '../../store/data-process/data-process.slice.ts';
 

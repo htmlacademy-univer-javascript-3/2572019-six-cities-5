@@ -34,5 +34,5 @@ export function useOfferPage() {
     }
   }, [id, dispatch]);
 
-  return {currentOffer, nearbyPoints, nearbyOffers};
+  return {currentOffer, nearbyPoints, nearbyOffers: nearbyOffers.length >= 3 ? nearbyOffers.slice(0, 3) : nearbyOffers};
 }

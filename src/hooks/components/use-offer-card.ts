@@ -1,33 +1,43 @@
 import {OfferCardVariants} from '../../types/variants.ts';
+import {toggleOfferFavoriteStatus} from '../../store/api-actions.ts';
+import {useAppDispatch} from '../services/redux.ts';
+import {OfferShort} from '../../types/offers/offer-short.ts';
+import classNames from 'classnames';
+import {useCallback} from 'react';
 
 const variantData = {
   main: {
-    placeCardClassName: 'cities__card place-card',
-    cardInfoClassName: 'place-card__info',
-    imageWrapperClassName: 'cities__image-wrapper place-card__image-wrapper',
+    classPrefix: 'cities',
     imageSizes: {width: '260', height: '200'}
   },
   favorites: {
-    placeCardClassName: 'favorites__card place-card',
-    cardInfoClassName: 'favorites__card-info place-card__info',
-    imageWrapperClassName: 'favorites__image-wrapper place-card__image-wrapper',
+    classPrefix: 'favorites',
     imageSizes: {width: '150', height: '110'}
   },
 };
 
 type OfferCardController = {
   variant: OfferCardVariants;
+  offerInfo: OfferShort;
 }
 
-export function useOfferCard({variant}: OfferCardController) {
+export function useOfferCard({variant, offerInfo}: OfferCardController) {
   const {
-    placeCardClassName,
-    cardInfoClassName,
-    imageWrapperClassName,
+    classPrefix,
     imageSizes
   } = variantData[variant];
 
+  const dispatch = useAppDispatch();
+  const handleButtonClick = useCallback(() => {
+    dispatch(toggleOfferFavoriteStatus(offerInfo));
+  }, []);
+
+  const placeCardClassName = classNames(`${classPrefix}__card`, 'place-card');
+  const cardInfoClassName = classNames('place-card__info', {'favorites__card-info': classPrefix === 'favorites'});
+  const imageWrapperClassName = classNames('place-card__image-wrapper', `${classPrefix}__image-wrapper`);
+
   return {
+    handleButtonClick,
     placeCardClassName,
     cardInfoClassName,
     imageWrapperClassName,

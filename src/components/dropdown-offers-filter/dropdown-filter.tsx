@@ -1,6 +1,6 @@
-import {SortingOrder} from '../../types/sorting-order.ts';
 import DropdownFilterOption from './dropdown-filter-option.tsx';
 import {useDropdownOffersFilter} from '../../hooks/components/use-dropdown-offers-filter.ts';
+import {SortingOrder} from '../../const.ts';
 
 function DropdownFilter() {
   const {handleSortingOnClick, currentSortingOrder, dropdownIsOpen, setDropdownIsOpen} = useDropdownOffersFilter();

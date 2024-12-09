@@ -12,12 +12,12 @@ import {Nullable} from '../../../types/nullable.ts';
 import {memo} from 'react';
 
 type PlaceCardProps = {
-  placeShortInfo: OfferShort;
+  offerInfo: OfferShort;
   variant: OfferCardVariants;
   onCardHover?: (id: Nullable<string>) => void;
 }
 
-function OfferCard({placeShortInfo, variant, onCardHover}: PlaceCardProps): JSX.Element {
+function OfferCard({offerInfo, variant, onCardHover}: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
@@ -27,15 +27,16 @@ function OfferCard({placeShortInfo, variant, onCardHover}: PlaceCardProps): JSX.
     isPremium,
     rating,
     previewImage
-  } = placeShortInfo;
+  } = offerInfo;
 
   const {
+    handleButtonClick,
     placeCardClassName,
     cardInfoClassName,
     imageWrapperClassName,
     imageWidth,
     imageHeight
-  } = useOfferCard({variant});
+  } = useOfferCard({variant, offerInfo});
 
   return (
     <article
@@ -58,7 +59,7 @@ function OfferCard({placeShortInfo, variant, onCardHover}: PlaceCardProps): JSX.
       <div className={cardInfoClassName}>
         <div className="place-card__price-wrapper">
           <OfferPrice price={price} variant={'card'}/>
-          <BookmarkButton inFavorites={isFavorite} variant={'card'}/>
+          <BookmarkButton isFavorite={isFavorite} variant={'card'} onClick={handleButtonClick}/>
         </div>
         <Rating value={rating} variant={'card'}/>
         <OfferCardTitle type={type} name={title} id={id}/>

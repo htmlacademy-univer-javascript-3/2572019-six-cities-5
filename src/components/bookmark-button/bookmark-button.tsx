@@ -1,29 +1,25 @@
-import classNames from 'classnames';
 import {useBookmarkButton} from '../../hooks/components/use-bookmark-button.ts';
 import {BookmarkButtonVariants} from '../../types/variants.ts';
 import {memo} from 'react';
 
 type BookmarkButtonProps = {
-  inFavorites?: boolean;
+  isFavorite?: boolean;
   variant: BookmarkButtonVariants;
+  onClick: () => void;
 }
 
-function BookmarkButton({inFavorites, variant}: BookmarkButtonProps): JSX.Element {
+function BookmarkButton({isFavorite, variant, onClick}: BookmarkButtonProps): JSX.Element {
   const {
-    buttonMainClassName,
-    buttonActiveClassName,
+    handleButtonClick,
+    buttonClassName,
     svgClassName,
     svgWidth,
     svgHeight
-  } = useBookmarkButton({variant});
+  } = useBookmarkButton({variant, isFavorite, onClick});
 
-  const buttonFullClassName = classNames(
-    buttonMainClassName,
-    {[`${buttonActiveClassName}`]: inFavorites}
-  );
 
   return (
-    <button className={buttonFullClassName} type="button">
+    <button className={buttonClassName} type="button" onClick={handleButtonClick}>
       <svg className={svgClassName} width={svgWidth} height={svgHeight}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

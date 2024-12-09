@@ -12,7 +12,7 @@ function OfferCardsContainer({offers, className, onCardHover}: OfferCardListCont
   return (
     <div className={className}>
       {offers.map((offer) => (
-        <OfferCard key={offer.id} placeShortInfo={offer} variant={'main'} onCardHover={onCardHover}/>
+        <OfferCard key={offer.id} offerInfo={offer} variant={'main'} onCardHover={onCardHover}/>
       ))}
     </div>
   );

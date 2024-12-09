@@ -1,6 +1,8 @@
 import {StatusCodes} from 'http-status-codes';
 import {AxiosResponse} from 'axios';
 
+export const SERVER_MINIMAL_ERROR_CODE = 500;
+
 export type DetailMessageType = {
   errorType: string;
   message: string;
@@ -13,8 +15,8 @@ export type DetailMessageType = {
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true
+  [StatusCodes.NOT_FOUND]: true,
 };
 
-export const shouldDisplayError = (response: AxiosResponse) => StatusCodeMapping[response.status];
+export const shouldDisplayError = (response: AxiosResponse) =>
+  response.status >= SERVER_MINIMAL_ERROR_CODE ? true : StatusCodeMapping[response.status];

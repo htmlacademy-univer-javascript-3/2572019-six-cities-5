@@ -1,12 +1,14 @@
 import {capitalizeFirstLetter} from '../../utils.ts';
 import {OfferDetailed} from '../../types/offers/offer-detailed.ts';
+import {memo} from 'react';
 
 type OfferFeaturesProps = {
-  offer: OfferDetailed;
+    type: OfferDetailed['type'];
+    bedrooms: OfferDetailed['bedrooms'];
+    maxAdults: OfferDetailed['maxAdults'];
 };
 
-function OfferFeatures({offer}: OfferFeaturesProps) {
-  const {type, bedrooms, maxAdults} = offer;
+function OfferFeatures({type, bedrooms, maxAdults}: OfferFeaturesProps) {
   return (
     <ul className="offer__features">
       <li className="offer__feature offer__feature--entire">
@@ -22,4 +24,4 @@ function OfferFeatures({offer}: OfferFeaturesProps) {
   );
 }
 
-export default OfferFeatures;
+export default memo(OfferFeatures);

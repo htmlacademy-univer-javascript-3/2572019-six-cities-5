@@ -1,13 +1,12 @@
 import {Navigate} from 'react-router-dom';
-import {AppRoute, AuthStatus} from '../../const';
+import {AppRoute} from '../../const';
 import {PropsWithChildren, ReactNode} from 'react';
-import {useAppSelector} from '../../hooks/services/redux.ts';
-import {getAuthStatus} from '../../store/user-process/user-process.selectors.ts';
+import {useAuthorization} from '../../hooks/services/use-authorization.ts';
 
 function PrivateRoute({children}: PropsWithChildren): ReactNode {
-  const authorizationStatus = useAppSelector(getAuthStatus);
+  const isAuthorized = useAuthorization();
 
-  return authorizationStatus === AuthStatus.Auth
+  return isAuthorized
     ? children
     : <Navigate to={AppRoute.Login} />;
 }

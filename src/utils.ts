@@ -1,5 +1,6 @@
-import {CityObject, CityName} from './const.ts';
+import {CityName, CityObject} from './const.ts';
 import {City} from './types/city.ts';
+import {Reviews} from './types/review.ts';
 
 export function capitalizeFirstLetter(word: string) : string {
   return word.charAt(0).toUpperCase() + word.slice(1);
@@ -9,12 +10,6 @@ export const formatDate = (date: string) =>
   new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric'}).format(
     new Date(date)
   );
-
-export const shuffleArray = <T>(unshuffled: T[]) => unshuffled
-  .map((value) => ({ value, sort: Math.random() }))
-  .sort((a, b) => a.sort - b.sort)
-  .map(({ value }) => value)
-  .slice(0, 3);
 
 export const getCityObjectByName = (cityName: string) : City | undefined => {
   switch (cityName) {
@@ -32,3 +27,16 @@ export const getCityObjectByName = (cityName: string) : City | undefined => {
       return CityObject.Amsterdam;
   }
 };
+
+export const getRandomCity = () : City => {
+  const cities = Object.values(CityObject);
+  const randomIndex = Math.floor(Math.random() * cities.length);
+
+  return cities[randomIndex];
+};
+
+export function getFirstTenSortedReviews(allReviews: Reviews) {
+  return allReviews.toSorted((a, b) => (
+    new Date(b.date).getTime() - new Date(a.date).getTime()))
+    .slice(0, 10);
+}

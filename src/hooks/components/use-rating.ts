@@ -1,4 +1,4 @@
-import {RatingVariants} from '../types/variants.ts';
+import {RatingVariants} from '../../types/variants.ts';
 
 const variantData = {
   card: {

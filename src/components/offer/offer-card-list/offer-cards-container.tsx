@@ -8,7 +8,7 @@ type OfferCardListContainerProps = {
   onCardHover?: (id: Nullable<string>) => void;
 }
 
-function OfferCardListContainer({offers, className, onCardHover}: OfferCardListContainerProps) {
+function OfferCardsContainer({offers, className, onCardHover}: OfferCardListContainerProps) {
   return (
     <div className={className}>
       {offers.map((offer) => (
@@ -18,4 +18,4 @@ function OfferCardListContainer({offers, className, onCardHover}: OfferCardListC
   );
 }
 
-export default OfferCardListContainer;
+export default OfferCardsContainer;

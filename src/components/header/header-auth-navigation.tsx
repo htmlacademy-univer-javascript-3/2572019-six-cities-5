@@ -1,13 +1,14 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
-import {useAuthorization} from '../../hooks/use-authorization.ts';
-import {useAppDispatch, useAppSelector} from '../../hooks/redux.ts';
+import {useAuthorization} from '../../hooks/services/use-authorization.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/services/redux.ts';
 import {logoutAction} from '../../store/api-actions.ts';
+import {getUserData} from '../../store/user-process/user-process.selectors.ts';
 
-function HeaderNavigation(): JSX.Element {
+function HeaderAuthNavigation(): JSX.Element {
   const isAuthorized = useAuthorization();
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.userData);
+  const userData = useAppSelector(getUserData);
 
   const handleLinkClick = () => {
     dispatch(logoutAction());
@@ -47,4 +48,4 @@ function HeaderNavigation(): JSX.Element {
   );
 }
 
-export default HeaderNavigation;
+export default HeaderAuthNavigation;

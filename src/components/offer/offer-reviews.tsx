@@ -1,19 +1,19 @@
 import ReviewForm from '../review-form/review-form.tsx';
 import OfferReviewItem from './offer-review-item.tsx';
-import {Reviews} from '../../types/review.ts';
-import {useAuthorization} from '../../hooks/use-authorization.ts';
+import {useAuthorization} from '../../hooks/services/use-authorization.ts';
+import {useAppSelector} from '../../hooks/services/redux.ts';
+import {getFirstTenSortedReviews} from '../../utils.ts';
+import {getReviews} from '../../store/detailed-data-process/detailed-data-process.selectors.ts';
 
-type OfferReviewsProps = {
-  reviews: Reviews;
-  reviewsCount: number;
-}
-
-function OfferReviews({reviews, reviewsCount}: OfferReviewsProps) {
+function OfferReviews() {
   const isAuthorized = useAuthorization();
+  const allReviews = useAppSelector(getReviews);
+  const reviews = getFirstTenSortedReviews(allReviews);
+
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
-        Reviews &middot; <span className="reviews__amount">{reviewsCount}</span>
+        Reviews &middot; <span className="reviews__amount">{allReviews.length}</span>
       </h2>
       <ul className="reviews__list">
         {reviews.map((review) => (

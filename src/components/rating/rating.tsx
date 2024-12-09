@@ -1,6 +1,6 @@
-
-import {useRating} from '../../hooks/use-rating.ts';
+import {useRating} from '../../hooks/components/use-rating.ts';
 import {RatingVariants} from '../../types/variants.ts';
+import {memo} from 'react';
 
 type RatingProps = {
   value: number;
@@ -21,4 +21,4 @@ function Rating({ value, variant, children } : RatingProps) {
   );
 }
 
-export default Rating;
+export default memo(Rating);

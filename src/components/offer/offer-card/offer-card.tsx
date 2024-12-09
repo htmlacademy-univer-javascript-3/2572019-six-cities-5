@@ -6,9 +6,10 @@ import {AppRoute} from '../../../const.ts';
 import Rating from '../../rating/rating.tsx';
 import OfferPrice from '../offer-price.tsx';
 import OfferCardTitle from './offer-card-title.tsx';
-import {useOfferCard} from '../../../hooks/use-offer-card.ts';
+import {useOfferCard} from '../../../hooks/components/use-offer-card.ts';
 import {OfferCardVariants} from '../../../types/variants.ts';
 import {Nullable} from '../../../types/nullable.ts';
+import {memo} from 'react';
 
 type PlaceCardProps = {
   placeShortInfo: OfferShort;
@@ -66,4 +67,4 @@ function OfferCard({placeShortInfo, variant, onCardHover}: PlaceCardProps): JSX.
   );
 }
 
-export default OfferCard;
+export default memo(OfferCard);

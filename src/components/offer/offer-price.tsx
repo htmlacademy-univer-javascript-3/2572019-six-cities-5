@@ -1,4 +1,4 @@
-import {useOfferPrice} from '../../hooks/use-offer-price.ts';
+import {useOfferPrice} from '../../hooks/components/use-offer-price.ts';
 import {OfferPriceVariants} from '../../types/variants.ts';
 
 type PlaceCardPriceProps = {

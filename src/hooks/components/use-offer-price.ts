@@ -1,4 +1,4 @@
-import {OfferPriceVariants} from '../types/variants.ts';
+import {OfferPriceVariants} from '../../types/variants.ts';
 
 const variantData = {
   card: {

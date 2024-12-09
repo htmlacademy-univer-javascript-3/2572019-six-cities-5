@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import leaflet, {Map} from 'leaflet';
-import {Location} from '../types/location.ts';
-import {Nullable} from '../types/nullable.ts';
+import {Location} from '../../types/location.ts';
+import {Nullable} from '../../types/nullable.ts';
 
 
 type MapController = {

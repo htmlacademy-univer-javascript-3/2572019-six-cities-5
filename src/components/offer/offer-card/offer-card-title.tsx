@@ -9,8 +9,6 @@ type PlaceCardTitleProps = {
 }
 
 function OfferCardTitle({ type, name, id } : PlaceCardTitleProps) : JSX.Element {
-
-
   return (
     <>
       <h2 className="place-card__name">

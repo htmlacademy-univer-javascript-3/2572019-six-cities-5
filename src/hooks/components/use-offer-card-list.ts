@@ -1,4 +1,4 @@
-import {OfferCardListVariants} from '../types/variants.ts';
+import {OfferCardListVariants} from '../../types/variants.ts';
 
 type OfferCardListController = {
   variant: OfferCardListVariants;

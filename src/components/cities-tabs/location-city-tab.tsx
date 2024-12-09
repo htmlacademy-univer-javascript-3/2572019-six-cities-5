@@ -1,16 +1,16 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 import classNames from 'classnames';
-import {setActiveCity} from '../../store/actions.ts';
 import {City} from '../../types/city.ts';
-import {useAppDispatch} from '../../hooks/redux.ts';
+import {useAppDispatch} from '../../hooks/services/redux.ts';
+import {setActiveCity} from '../../store/data-process/data-process.slice.ts';
 
 type CityTabProps = {
   city: City;
-  isActive: boolean;
+  isActive?: boolean;
 }
 
-function CityTab({city, isActive}: CityTabProps): JSX.Element {
+function LocationCityTab({city, isActive}: CityTabProps): JSX.Element {
   const dispatch = useAppDispatch();
   const handleTabClick = () => dispatch(setActiveCity(city));
   const linkClassName = classNames('locations__item-link tabs__item', {'tabs__item--active': isActive});
@@ -27,4 +27,4 @@ function CityTab({city, isActive}: CityTabProps): JSX.Element {
   );
 }
 
-export default CityTab;
+export default LocationCityTab;

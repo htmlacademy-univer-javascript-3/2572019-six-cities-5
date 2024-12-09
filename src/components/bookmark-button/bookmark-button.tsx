@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import {useBookmarkButton} from '../../hooks/use-bookmark-button.ts';
+import {useBookmarkButton} from '../../hooks/components/use-bookmark-button.ts';
 import {BookmarkButtonVariants} from '../../types/variants.ts';
+import {memo} from 'react';
 
 type BookmarkButtonProps = {
   inFavorites?: boolean;
@@ -31,4 +32,4 @@ function BookmarkButton({inFavorites, variant}: BookmarkButtonProps): JSX.Elemen
   );
 }
 
-export default BookmarkButton;
+export default memo(BookmarkButton);

@@ -2,9 +2,9 @@ import {OffersShort} from '../../types/offers/offer-short.ts';
 import OfferCard from '../offer/offer-card/offer-card.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
-import {setActiveCity} from '../../store/actions.ts';
 import {getCityObjectByName} from '../../utils.ts';
-import {useAppDispatch} from '../../hooks/redux.ts';
+import {useAppDispatch} from '../../hooks/services/redux.ts';
+import {setActiveCity} from '../../store/data-process/data-process.slice.ts';
 
 type FavoritesListElementProps = {
   favoritesAtCity: OffersShort;

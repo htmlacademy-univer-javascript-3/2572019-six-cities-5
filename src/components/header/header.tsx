@@ -1,22 +1,23 @@
-import LogoHeader from '../logo/logo-header.tsx';
-import HeaderNavigation from './header-navigation.tsx';
+import HeaderLogo from './header-logo.tsx';
+import HeaderAuthNavigation from './header-auth-navigation.tsx';
+import {memo} from 'react';
 
 type HeaderProps = {
-  disableNav?: boolean;
-  isLogoActive?: boolean;
+  disableAuthNav?: boolean;
+  logoActive?: boolean;
 }
 
-function Header({disableNav, isLogoActive}: HeaderProps): JSX.Element {
+function Header({disableAuthNav, logoActive}: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
-          <LogoHeader isActive={isLogoActive}/>
-          {disableNav ? ' ' : <HeaderNavigation/>}
+          <HeaderLogo isActive={logoActive}/>
+          {disableAuthNav ? ' ' : <HeaderAuthNavigation/>}
         </div>
       </div>
     </header>
   );
 }
 
-export default Header;
+export default memo(Header);

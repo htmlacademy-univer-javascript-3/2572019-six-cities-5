@@ -1,6 +1,6 @@
 import {City} from '../../types/city.ts';
 import {useEffect, useRef} from 'react';
-import useMap from '../../hooks/use-map.ts';
+import useMap from '../../hooks/components/use-map.ts';
 import leaflet, {Icon, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {MapVariants} from '../../types/variants.ts';

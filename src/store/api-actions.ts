@@ -1,16 +1,15 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {OfferShort, OffersShort} from '../types/offers/offer-short.ts';
 import {AxiosInstance} from 'axios';
-import {APIRoute, AppRoute, AuthStatus} from '../const.ts';
-import {AppDispatch, RootState} from './index.tsx';
-import {redirectToRoute, setAuthStatus, setUserData} from './actions.ts';
+import {APIRoute, AppRoute, StoreNameSpace} from '../const.ts';
+import {redirectToRoute} from './action.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {UserData} from '../types/user-data.ts';
 import {AuthData} from '../types/auth-data.ts';
 import {OfferDetailed} from '../types/offers/offer-detailed.ts';
 import {Review, ReviewData, Reviews} from '../types/review.ts';
 import {Nullable} from '../types/nullable.ts';
-
+import {AppDispatch, RootState} from '../types/state.ts';
 
 type ExtraData = {
   dispatch: AppDispatch;
@@ -19,7 +18,7 @@ type ExtraData = {
 };
 
 export const fetchOffersAction = createAsyncThunk<OffersShort, undefined, ExtraData>(
-  'data/fetchOffers',
+  `${StoreNameSpace.Data}/fetchOffers`,
   async (_arg, {extra: api}) => {
     const {data} = await api.get<OffersShort>(APIRoute.Offers);
 
@@ -28,7 +27,7 @@ export const fetchOffersAction = createAsyncThunk<OffersShort, undefined, ExtraD
 );
 
 export const fetchOfferAction = createAsyncThunk<Nullable<OfferDetailed>, OfferDetailed['id'], ExtraData>(
-  'data/fetchOffer',
+  `${StoreNameSpace.DetailedData}/fetchOffer`,
   async (offerId, {extra: api}) => {
     const {data} = await api.get<OfferDetailed>(`${APIRoute.Offers}/${offerId}`);
 
@@ -37,7 +36,7 @@ export const fetchOfferAction = createAsyncThunk<Nullable<OfferDetailed>, OfferD
 );
 
 export const fetchNearPlacesAction = createAsyncThunk<OffersShort, OfferShort['id'], ExtraData>(
-  'data/fetchNearPlaces',
+  `${StoreNameSpace.DetailedData}/fetchNearPlaces`,
   async (offerId, {extra: api}) => {
     const {data} = await api.get<OffersShort>(`${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`);
 
@@ -46,7 +45,7 @@ export const fetchNearPlacesAction = createAsyncThunk<OffersShort, OfferShort['i
 );
 
 export const fetchReviewsAction = createAsyncThunk<Reviews, OfferShort['id'], ExtraData>(
-  'reviews/fetchReviews',
+  `${StoreNameSpace.DetailedData}/fetchReviews`,
   async (offerId, {extra: api}) => {
     const {data} = await api.get<Reviews>(`${APIRoute.Comments}/${offerId}`);
 
@@ -55,7 +54,7 @@ export const fetchReviewsAction = createAsyncThunk<Reviews, OfferShort['id'], Ex
 );
 
 export const postReviewAction = createAsyncThunk<Review, {reviewData: ReviewData; offerId: OfferShort['id']}, ExtraData>(
-  'reviews/postReview',
+  `${StoreNameSpace.DetailedData}/postReview`,
   async ({reviewData, offerId}, {extra: api}) => {
     const {data} = await api.post<Review>(`${APIRoute.Comments}/${offerId}`, reviewData);
 
@@ -64,37 +63,29 @@ export const postReviewAction = createAsyncThunk<Review, {reviewData: ReviewData
 );
 
 export const checkAuthStatusAction = createAsyncThunk<Nullable<UserData>, undefined, ExtraData>(
-  'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
-    try {
-      const {data} = await api.get<UserData>(APIRoute.Login);
-      dispatch(setAuthStatus(AuthStatus.Auth));
-      dispatch(setUserData(data));
-      return data;
-    } catch {
-      dispatch(setAuthStatus(AuthStatus.NoAuth));
-      return null;
-    }
+  `${StoreNameSpace.User}/checkAuth`,
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<UserData>(APIRoute.Login);
+
+    return data;
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, ExtraData>(
-  'user/login',
+export const loginAction = createAsyncThunk<Nullable<UserData>, AuthData, ExtraData>(
+  `${StoreNameSpace.User}/login`,
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
-    dispatch(setAuthStatus(AuthStatus.Auth));
-    dispatch(setUserData(data));
     dispatch(redirectToRoute(AppRoute.Main));
+
+    return data;
   },
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, ExtraData>(
-  'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  `${StoreNameSpace.User}/logout`,
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(setAuthStatus(AuthStatus.NoAuth));
-    dispatch(setUserData(null));
   },
 );

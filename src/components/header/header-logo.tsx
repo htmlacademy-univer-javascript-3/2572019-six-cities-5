@@ -2,11 +2,11 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 import classNames from 'classnames';
 
-type LogoHeaderProps = {
+type HeaderLogoProps = {
   isActive?: boolean;
 }
 
-function LogoHeader({isActive} : LogoHeaderProps) : JSX.Element {
+function HeaderLogo({isActive} : HeaderLogoProps) : JSX.Element {
   const className = classNames('header__logo-link' , {'header__logo-link--active' : isActive});
 
   return (
@@ -18,4 +18,4 @@ function LogoHeader({isActive} : LogoHeaderProps) : JSX.Element {
   );
 }
 
-export default LogoHeader;
+export default HeaderLogo;

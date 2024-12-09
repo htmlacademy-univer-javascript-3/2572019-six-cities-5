@@ -1,12 +1,14 @@
-export type BookmarkButtonVariants = 'card' | 'full';
+type CardFullVariant = 'card' | 'full';
 
-export type PremiumSignVariants = 'card' | 'full';
+export type BookmarkButtonVariants = CardFullVariant;
 
-export type RatingVariants = 'card' | 'full' | 'review';
+export type PremiumSignVariants = CardFullVariant;
+
+export type OfferPriceVariants = CardFullVariant;
+
+export type RatingVariants = CardFullVariant | 'review';
 
 export type OfferCardVariants = 'main' | 'favorites';
-
-export type OfferPriceVariants = 'card' | 'full';
 
 export type MapVariants = 'main' | 'offer';
 

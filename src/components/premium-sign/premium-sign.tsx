@@ -1,4 +1,5 @@
 import {PremiumSignVariants} from '../../types/variants.ts';
+import {memo} from 'react';
 
 type PremiumSignProps = {
   show?: boolean;
@@ -16,4 +17,4 @@ function PremiumSign({ show, variant } : PremiumSignProps) {
   );
 }
 
-export default PremiumSign;
+export default memo(PremiumSign);

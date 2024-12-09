@@ -1,4 +1,4 @@
-import {BookmarkButtonVariants} from '../types/variants.ts';
+import {BookmarkButtonVariants} from '../../types/variants.ts';
 
 const variantData = {
   card: {

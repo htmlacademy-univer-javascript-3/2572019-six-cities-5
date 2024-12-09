@@ -3,10 +3,7 @@ import {OfferCardListVariants} from '../../../types/variants.ts';
 import DropdownFilter from '../../dropdown-offers-filter/dropdown-filter.tsx';
 import OfferCardsContainer from './offer-cards-container.tsx';
 import {useOfferCardList} from '../../../hooks/components/use-offer-card-list.ts';
-import {Nullable} from '../../../types/nullable.ts';
-import {useAppDispatch} from '../../../hooks/services/redux.ts';
-import {useCallback} from 'react';
-import {setHoverCardId} from '../../../store/data-process/data-process.slice.ts';
+import {memo} from 'react';
 
 type OfferCardListProps = {
   cityName?: string;
@@ -16,10 +13,8 @@ type OfferCardListProps = {
 }
 
 function OfferCardList({cityName, offers, variant, offersCount}: OfferCardListProps) {
-  const dispatch = useAppDispatch();
-  const handleHoverCard = useCallback((id: Nullable<string>) => dispatch(setHoverCardId(id)), []);
-
   const {
+    handleHoverCard,
     sectionClassName,
     headerClassName,
     headerContent,
@@ -39,4 +34,4 @@ function OfferCardList({cityName, offers, variant, offersCount}: OfferCardListPr
   );
 }
 
-export default OfferCardList;
+export default memo(OfferCardList);

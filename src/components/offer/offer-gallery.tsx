@@ -1,6 +1,8 @@
+import {memo} from 'react';
+
 type OfferGalleryProps = {
-    images: string[];
-  }
+  images: string[];
+}
 
 function OfferGallery({ images } : OfferGalleryProps) {
   return (
@@ -16,4 +18,4 @@ function OfferGallery({ images } : OfferGalleryProps) {
   );
 }
 
-export default OfferGallery;
+export default memo(OfferGallery);

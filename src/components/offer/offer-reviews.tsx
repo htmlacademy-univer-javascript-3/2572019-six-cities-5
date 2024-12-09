@@ -4,6 +4,7 @@ import {useAuthorization} from '../../hooks/services/use-authorization.ts';
 import {useAppSelector} from '../../hooks/services/redux.ts';
 import {getFirstTenSortedReviews} from '../../utils.ts';
 import {getReviews} from '../../store/detailed-data-process/detailed-data-process.selectors.ts';
+import {memo} from 'react';
 
 function OfferReviews() {
   const isAuthorized = useAuthorization();
@@ -25,4 +26,4 @@ function OfferReviews() {
   );
 }
 
-export default OfferReviews;
+export default memo(OfferReviews);

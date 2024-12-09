@@ -1,8 +1,8 @@
-import {SortingOrder} from '../../types/sorting-order.ts';
 import classNames from 'classnames';
 import React from 'react';
 import {useAppDispatch} from '../../hooks/services/redux.ts';
 import {setSortingOrder} from '../../store/data-process/data-process.slice.ts';
+import {SortingOrder} from '../../const.ts';
 
 type DropdownFilterOptionProps = {
   sortingOption: SortingOrder;

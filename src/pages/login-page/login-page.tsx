@@ -1,6 +1,6 @@
 import Header from '../../components/header/header.tsx';
 import {AppRoute} from '../../const.ts';
-import {useNavigate} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import {getRandomCity} from '../../utils.ts';
 import {useAuthorization} from '../../hooks/services/use-authorization.ts';
 import LoginForm from '../../components/login-form/login-form.tsx';
@@ -8,13 +8,11 @@ import LocationCityTab from '../../components/cities-tabs/location-city-tab.tsx'
 import {ReactNode} from 'react';
 
 function LoginPage(): ReactNode {
-  const navigate = useNavigate();
   const isAuthorized = useAuthorization();
   const randomCity = getRandomCity();
 
   if (isAuthorized) {
-    navigate(AppRoute.Main);
-    return null;
+    return <Navigate to={AppRoute.Main} />;
   }
 
   return (

@@ -8,12 +8,20 @@ import OfferHost from '../offer-host.tsx';
 import OfferReviews from '../offer-reviews.tsx';
 import {OfferDetailed} from '../../../types/offers/offer-detailed.ts';
 import OfferGallery from '../offer-gallery.tsx';
+import {toggleOfferFavoriteStatus} from '../../../store/api-actions.ts';
+import {useAppDispatch} from '../../../hooks/services/redux.ts';
+import {memo} from 'react';
 
 type OfferDetailProps = {
   offer: OfferDetailed;
 }
 
 function OfferDetail({offer: currentOffer} : OfferDetailProps) : JSX.Element {
+  const dispatch = useAppDispatch();
+  const handleButtonClick = () => {
+    dispatch(toggleOfferFavoriteStatus(currentOffer));
+  };
+
   return (
     <>
       <OfferGallery images={currentOffer.images}/>
@@ -25,13 +33,13 @@ function OfferDetail({offer: currentOffer} : OfferDetailProps) : JSX.Element {
             <h1 className="offer__name">
               {currentOffer.title}
             </h1>
-            <BookmarkButton variant={'full'}/>
+            <BookmarkButton variant={'full'} isFavorite={currentOffer.isFavorite} onClick={handleButtonClick}/>
           </div>
 
           <Rating value={currentOffer.rating} variant={'full'}>
             <span className="offer__rating-value rating__value">{currentOffer.rating}</span>
           </Rating>
-          <OfferFeatures offer={currentOffer}/>
+          <OfferFeatures type={currentOffer.type} maxAdults={currentOffer.maxAdults} bedrooms={currentOffer.bedrooms}/>
           <OfferPrice price={currentOffer.price} variant={'full'}/>
           <OfferInside offer={currentOffer}/>
           <OfferHost host={currentOffer.host} description={currentOffer.description}/>
@@ -43,4 +51,4 @@ function OfferDetail({offer: currentOffer} : OfferDetailProps) : JSX.Element {
   );
 }
 
-export default OfferDetail;
+export default memo(OfferDetail);

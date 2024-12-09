@@ -1,4 +1,3 @@
-import {SortingOrder} from './types/sorting-order.ts';
 import {OfferShort} from './types/offers/offer-short.ts';
 import {City} from './types/city.ts';
 
@@ -82,13 +81,22 @@ export enum APIRoute {
   Logout = '/logout',
   Nearby = '/nearby',
   Comments = '/comments',
+  Favorite = '/favorite',
+}
+
+export enum SortingOrder {
+  popular = 'Popular',
+  priceToHigh = 'Price: low to high',
+  priceToLow = 'Price: high to low',
+  topRated = 'Top rated first',
 }
 
 export enum StoreNameSpace {
   Data = 'DATA',
   User = 'USER',
-  DetailedData = 'DETAILED_DATA',
-  RequestCondition = 'REQUEST_CONDITION',
+  DetailedData = 'DETAILED',
+  RequestCondition = 'REQ_CONDITION',
+  FavoriteData = 'FAVORITE',
 }
 
 export const SortComparisons : Record<SortingOrder, (a: OfferShort, b: OfferShort) => number> = {

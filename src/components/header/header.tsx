@@ -1,5 +1,5 @@
 import HeaderLogo from './header-logo.tsx';
-import HeaderAuthNavigation from './header-auth-navigation.tsx';
+import HeaderUserNavigation from './header-user-navigation.tsx';
 import {memo} from 'react';
 
 type HeaderProps = {
@@ -13,7 +13,7 @@ function Header({disableAuthNav, logoActive}: HeaderProps): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <HeaderLogo isActive={logoActive}/>
-          {disableAuthNav ? ' ' : <HeaderAuthNavigation/>}
+          {disableAuthNav ? ' ' : <HeaderUserNavigation/>}
         </div>
       </div>
     </header>

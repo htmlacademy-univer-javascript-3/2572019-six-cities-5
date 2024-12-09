@@ -1,4 +1,8 @@
 import {OfferCardListVariants} from '../../types/variants.ts';
+import {useCallback} from 'react';
+import {Nullable} from '../../types/nullable.ts';
+import {setHoverCardId} from '../../store/data-process/data-process.slice.ts';
+import {useAppDispatch} from '../services/redux.ts';
 
 type OfferCardListController = {
   variant: OfferCardListVariants;
@@ -26,5 +30,8 @@ const variantData = {
 };
 
 export function useOfferCardList({variant}: OfferCardListController) {
-  return variantData[variant];
+  const dispatch = useAppDispatch();
+  const handleHoverCard = useCallback((id: Nullable<string>) => dispatch(setHoverCardId(id)), []);
+
+  return {...variantData[variant], handleHoverCard};
 }

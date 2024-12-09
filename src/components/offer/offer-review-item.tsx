@@ -1,6 +1,7 @@
 import Rating from '../rating/rating.tsx';
 import {formatDate} from '../../utils.ts';
 import {Review} from '../../types/review.ts';
+import {memo} from 'react';
 
 type OfferReviewItemProps = {
   item: Review;
@@ -33,4 +34,4 @@ function OfferReviewItem({item}: OfferReviewItemProps) {
   );
 }
 
-export default OfferReviewItem;
+export default memo(OfferReviewItem);

@@ -1,10 +1,10 @@
 import {DataProcess} from '../../types/state.ts';
-import {CityObject, StoreNameSpace} from '../../const.ts';
-import {SortingOrder} from '../../types/sorting-order.ts';
+import {CityObject, SortingOrder, StoreNameSpace} from '../../const.ts';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchOffersAction} from '../api-actions.ts';
+import {fetchOffersAction, toggleOfferFavoriteStatus} from '../api-actions.ts';
 import {City} from '../../types/city.ts';
 import {OfferShort, OffersShort} from '../../types/offers/offer-short.ts';
+import {Nullable} from '../../types/nullable.ts';
 
 const initialState: DataProcess = {
   activeCity: CityObject.Paris,
@@ -21,7 +21,7 @@ export const dataProcess = createSlice(
       setActiveCity: (state, action: PayloadAction<City>) => {
         state.activeCity = action.payload;
       },
-      setHoverCardId: (state, action: PayloadAction<OfferShort['id']>) => {
+      setHoverCardId: (state, action: PayloadAction<Nullable<OfferShort['id']>>) => {
         state.hoverCardId = action.payload;
       },
       setSortingOrder: (state, action: PayloadAction<SortingOrder>) => {
@@ -35,6 +35,12 @@ export const dataProcess = createSlice(
       builder
         .addCase(fetchOffersAction.fulfilled, (state, action) => {
           state.offers = action.payload;
+        })
+        .addCase(toggleOfferFavoriteStatus.fulfilled, (state, action) => {
+          const offerIndex = state.offers.findIndex((offer) => offer.id === action.payload.id);
+          if (offerIndex > -1) {
+            state.offers[offerIndex].isFavorite = action.payload.isFavorite;
+          }
         });
     }
   }

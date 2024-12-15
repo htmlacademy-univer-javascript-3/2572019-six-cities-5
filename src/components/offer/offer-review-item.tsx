@@ -1,4 +1,4 @@
-import Rating from '../rating/rating.tsx';
+import Rating from '../rating.tsx';
 import {formatDate} from '../../utils.ts';
 import {Review} from '../../types/review.ts';
 import {memo} from 'react';

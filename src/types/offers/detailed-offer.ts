@@ -1,7 +1,7 @@
 import {UserData} from '../user-data.ts';
-import {OfferShort} from './offer-short.ts';
+import {BriefOffer} from './brief-offer.ts';
 
-export type OfferDetailed = Omit<OfferShort, 'previewImage'> & {
+export type DetailedOffer = Omit<BriefOffer, 'previewImage'> & {
   description: string;
   bedrooms: number;
   goods: string[];
@@ -10,4 +10,4 @@ export type OfferDetailed = Omit<OfferShort, 'previewImage'> & {
   maxAdults: number;
 }
 
-export type OffersDetailed = Map<string, OfferDetailed>;
+export type DetailedOffers = Map<string, DetailedOffer>;

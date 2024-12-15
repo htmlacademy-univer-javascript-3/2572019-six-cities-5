@@ -1,7 +1,7 @@
 import {OfferCardVariants} from '../../types/variants.ts';
 import {toggleOfferFavoriteStatus} from '../../store/api-actions.ts';
 import {useAppDispatch} from '../services/redux.ts';
-import {OfferShort} from '../../types/offers/offer-short.ts';
+import {BriefOffer} from '../../types/offers/brief-offer.ts';
 import classNames from 'classnames';
 import {useCallback} from 'react';
 
@@ -18,7 +18,7 @@ const variantData = {
 
 type OfferCardController = {
   variant: OfferCardVariants;
-  offerInfo: OfferShort;
+  offerInfo: BriefOffer;
 }
 
 export function useOfferCard({variant, offerInfo}: OfferCardController) {

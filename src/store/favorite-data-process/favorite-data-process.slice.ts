@@ -1,15 +1,15 @@
 import {FavoriteDataProcess} from '../../types/state.ts';
 import {createSlice} from '@reduxjs/toolkit';
-import {StoreNameSpace} from '../../const.ts';
+import {NameStore} from '../../constants.ts';
 import {fetchFavoritesAction, toggleOfferFavoriteStatus} from '../api-actions.ts';
-import {OfferShort} from '../../types/offers/offer-short.ts';
+import {BriefOffer} from '../../types/offers/brief-offer.ts';
 
 const initialState: FavoriteDataProcess = {
   favoriteOffers: [],
 };
 
 export const favoriteDataProcess = createSlice({
-  name: StoreNameSpace.FavoriteData,
+  name: NameStore.FavoriteData,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -19,7 +19,7 @@ export const favoriteDataProcess = createSlice({
       })
       .addCase(toggleOfferFavoriteStatus.fulfilled, (state, action) => {
         if (action.payload.isFavorite) {
-          state.favoriteOffers.push((<OfferShort>action.payload));
+          state.favoriteOffers.push((<BriefOffer>action.payload));
         } else {
           const offerIndex = state.favoriteOffers.findIndex((offer) => offer.id === action.payload.id);
           state.favoriteOffers.splice(offerIndex, 1);

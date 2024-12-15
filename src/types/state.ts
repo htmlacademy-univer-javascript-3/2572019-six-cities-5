@@ -1,11 +1,11 @@
 import {store} from '../store';
-import {AuthStatus, SortingOrder} from '../const.ts';
+import {AuthStatus, SortOption} from '../constants.ts';
 import {Nullable} from './nullable.ts';
 import {UserData} from './user-data.ts';
-import {OffersShort} from './offers/offer-short.ts';
+import {BriefOffers} from './offers/brief-offer.ts';
 import {City} from './city.ts';
 import {RequestStatus} from './request-status.ts';
-import {OfferDetailed} from './offers/offer-detailed.ts';
+import {DetailedOffer} from './offers/detailed-offer.ts';
 import {Reviews} from './review.ts';
 
 export type UserProcess = {
@@ -15,14 +15,14 @@ export type UserProcess = {
 
 export type DataProcess = {
   activeCity: City;
-  offers: OffersShort;
+  offers: BriefOffers;
   hoverCardId: Nullable<string>;
-  sortingOrder: SortingOrder;
+  sortOption: SortOption;
 }
 
 export type DetailedDataProcess = {
-  offerDetailed: Nullable<OfferDetailed>;
-  nearPlaces: OffersShort;
+  detailedOffer: Nullable<DetailedOffer>;
+  nearbyOffers: BriefOffers;
   reviews: Reviews;
 }
 
@@ -31,9 +31,9 @@ export type RequestProcess = {
 }
 
 export type FavoriteDataProcess = {
-  favoriteOffers: OffersShort;
+  favoriteOffers: BriefOffers;
 }
 
-export type RootState = ReturnType<typeof store.getState>;
+export type AppState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;

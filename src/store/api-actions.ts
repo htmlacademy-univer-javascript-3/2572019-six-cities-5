@@ -1,70 +1,70 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {OfferShort, OffersShort} from '../types/offers/offer-short.ts';
+import {BriefOffer, BriefOffers} from '../types/offers/brief-offer.ts';
 import {AxiosInstance} from 'axios';
-import {APIRoute, AppRoute, StoreNameSpace} from '../const.ts';
+import {APIRoute, AppRoute, NameStore} from '../constants.ts';
 import {redirectToRoute} from './action.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {UserData} from '../types/user-data.ts';
 import {AuthData} from '../types/auth-data.ts';
-import {OfferDetailed} from '../types/offers/offer-detailed.ts';
+import {DetailedOffer} from '../types/offers/detailed-offer.ts';
 import {Review, ReviewData, Reviews} from '../types/review.ts';
 import {Nullable} from '../types/nullable.ts';
-import {AppDispatch, RootState} from '../types/state.ts';
+import {AppDispatch, AppState} from '../types/state.ts';
 
 type ExtraData = {
   dispatch: AppDispatch;
-  state: RootState;
+  state: AppState;
   extra: AxiosInstance;
 };
 
-export const fetchFavoritesAction = createAsyncThunk<OffersShort, undefined, ExtraData>(
-  `${StoreNameSpace.FavoriteData}/fetchFavorites`,
+export const fetchFavoritesAction = createAsyncThunk<BriefOffers, undefined, ExtraData>(
+  `${NameStore.FavoriteData}/fetchFavorites`,
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<OffersShort>(APIRoute.Favorite);
+    const {data} = await api.get<BriefOffers>(APIRoute.Favorite);
 
     return data;
   },
 );
 
-export const toggleOfferFavoriteStatus = createAsyncThunk<OfferDetailed | OfferShort, OfferShort | OfferDetailed, ExtraData>(
-  `${StoreNameSpace.FavoriteData}/toggleOfferFavoriteStatus`,
+export const toggleOfferFavoriteStatus = createAsyncThunk<DetailedOffer | BriefOffer, BriefOffer | DetailedOffer, ExtraData>(
+  `${NameStore.FavoriteData}/toggleOfferFavoriteStatus`,
   async (offer, {extra: api}) => {
     const newStatus = offer.isFavorite ? 0 : 1;
-    const {data} = await api.post<OfferDetailed | OfferShort>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`);
+    const {data} = await api.post<DetailedOffer | BriefOffer>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`);
 
     return data;
   },
 );
 
-export const fetchOffersAction = createAsyncThunk<OffersShort, undefined, ExtraData>(
-  `${StoreNameSpace.Data}/fetchOffers`,
+export const fetchOffersAction = createAsyncThunk<BriefOffers, undefined, ExtraData>(
+  `${NameStore.Data}/fetchOffers`,
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<OffersShort>(APIRoute.Offers);
+    const {data} = await api.get<BriefOffers>(APIRoute.Offers);
 
     return data;
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<Nullable<OfferDetailed>, OfferDetailed['id'], ExtraData>(
-  `${StoreNameSpace.DetailedData}/fetchOffer`,
+export const fetchOfferAction = createAsyncThunk<Nullable<DetailedOffer>, DetailedOffer['id'], ExtraData>(
+  `${NameStore.DetailedData}/fetchOffer`,
   async (offerId, {extra: api}) => {
-    const {data} = await api.get<OfferDetailed>(`${APIRoute.Offers}/${offerId}`);
+    const {data} = await api.get<DetailedOffer>(`${APIRoute.Offers}/${offerId}`);
 
     return data;
   },
 );
 
-export const fetchNearPlacesAction = createAsyncThunk<OffersShort, OfferShort['id'], ExtraData>(
-  `${StoreNameSpace.DetailedData}/fetchNearPlaces`,
+export const fetchNearbyOffersAction = createAsyncThunk<BriefOffers, BriefOffer['id'], ExtraData>(
+  `${NameStore.DetailedData}/fetchNearPlaces`,
   async (offerId, {extra: api}) => {
-    const {data} = await api.get<OffersShort>(`${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`);
+    const {data} = await api.get<BriefOffers>(`${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`);
 
     return data;
   },
 );
 
-export const fetchReviewsAction = createAsyncThunk<Reviews, OfferShort['id'], ExtraData>(
-  `${StoreNameSpace.DetailedData}/fetchReviews`,
+export const fetchReviewsAction = createAsyncThunk<Reviews, BriefOffer['id'], ExtraData>(
+  `${NameStore.DetailedData}/fetchReviews`,
   async (offerId, {extra: api}) => {
     const {data} = await api.get<Reviews>(`${APIRoute.Comments}/${offerId}`);
 
@@ -72,8 +72,8 @@ export const fetchReviewsAction = createAsyncThunk<Reviews, OfferShort['id'], Ex
   },
 );
 
-export const postReviewAction = createAsyncThunk<Review, {reviewData: ReviewData; offerId: OfferShort['id']}, ExtraData>(
-  `${StoreNameSpace.DetailedData}/postReview`,
+export const postReviewAction = createAsyncThunk<Review, {reviewData: ReviewData; offerId: BriefOffer['id']}, ExtraData>(
+  `${NameStore.DetailedData}/postReview`,
   async ({reviewData, offerId}, {extra: api}) => {
     const {data} = await api.post<Review>(`${APIRoute.Comments}/${offerId}`, reviewData);
 
@@ -82,7 +82,7 @@ export const postReviewAction = createAsyncThunk<Review, {reviewData: ReviewData
 );
 
 export const fetchUserData = createAsyncThunk<Nullable<UserData>, undefined, ExtraData>(
-  `${StoreNameSpace.User}/fetchUserData`,
+  `${NameStore.User}/fetchUserData`,
   async (_arg, {extra: api, dispatch}) => {
     const {data} = await api.get<UserData>(APIRoute.Login);
     dispatch(fetchFavoritesAction());
@@ -92,7 +92,7 @@ export const fetchUserData = createAsyncThunk<Nullable<UserData>, undefined, Ext
 );
 
 export const loginAction = createAsyncThunk<Nullable<UserData>, AuthData, ExtraData>(
-  `${StoreNameSpace.User}/login`,
+  `${NameStore.User}/login`,
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
@@ -104,7 +104,7 @@ export const loginAction = createAsyncThunk<Nullable<UserData>, AuthData, ExtraD
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, ExtraData>(
-  `${StoreNameSpace.User}/logout`,
+  `${NameStore.User}/logout`,
   async (_arg, {extra: api, dispatch}) => {
     await api.delete(APIRoute.Logout);
     dropToken();

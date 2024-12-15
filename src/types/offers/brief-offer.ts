@@ -1,7 +1,7 @@
 import {City} from '../city.ts';
 import {Location} from '../location.ts';
 
-export type OfferShort = {
+export type BriefOffer = {
   id: string;
   title: string;
   type: string;
@@ -14,4 +14,4 @@ export type OfferShort = {
   previewImage: string;
 }
 
-export type OffersShort = OfferShort[];
+export type BriefOffers = BriefOffer[];

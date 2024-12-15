@@ -1,13 +1,13 @@
 import {useOfferPrice} from '../../hooks/components/use-offer-price.ts';
 import {OfferPriceVariants} from '../../types/variants.ts';
 
-type PlaceCardPriceProps = {
+type OfferPriceProps = {
   price: number;
   variant: OfferPriceVariants;
   currencySymbol?: string;
 }
 
-function OfferPrice({price, variant, currencySymbol}: PlaceCardPriceProps): JSX.Element {
+function OfferPrice({price, variant, currencySymbol}: OfferPriceProps): JSX.Element {
   const {
     priceClassName,
     priceValueClassName,

@@ -1,12 +1,12 @@
-import {City} from '../../types/city.ts';
+import {City} from '../types/city.ts';
 import {useEffect, useRef} from 'react';
-import useMap from '../../hooks/components/use-map.ts';
+import useMap from '../hooks/components/use-map.ts';
 import leaflet, {Icon, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {MapVariants} from '../../types/variants.ts';
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const.ts';
-import {Points} from '../../types/point.ts';
-import {Nullable} from '../../types/nullable.ts';
+import {MapVariants} from '../types/variants.ts';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../constants.ts';
+import {Points} from '../types/point.ts';
+import {Nullable} from '../types/nullable.ts';
 
 type MapProps = {
   city: City;

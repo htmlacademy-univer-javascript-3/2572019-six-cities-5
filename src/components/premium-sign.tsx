@@ -1,4 +1,4 @@
-import {PremiumSignVariants} from '../../types/variants.ts';
+import {PremiumSignVariants} from '../types/variants.ts';
 import {memo} from 'react';
 
 type PremiumSignProps = {

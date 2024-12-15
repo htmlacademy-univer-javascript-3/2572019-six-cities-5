@@ -1,4 +1,4 @@
-import {OffersShort} from '../../../types/offers/offer-short.ts';
+import {BriefOffers} from '../../../types/offers/brief-offer.ts';
 import {OfferCardListVariants} from '../../../types/variants.ts';
 import DropdownFilter from '../../dropdown-offers-filter/dropdown-filter.tsx';
 import OfferCardsContainer from './offer-cards-container.tsx';
@@ -7,7 +7,7 @@ import {memo} from 'react';
 
 type OfferCardListProps = {
   cityName?: string;
-  offers: OffersShort;
+  offers: BriefOffers;
   offersCount?: number;
   variant: OfferCardListVariants;
 }

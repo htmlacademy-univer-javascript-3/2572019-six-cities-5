@@ -2,7 +2,7 @@ import {BookmarkButtonVariants} from '../../types/variants.ts';
 import classNames from 'classnames';
 import {useAuthorization} from '../services/use-authorization.ts';
 import {useNavigate} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
+import {AppRoute} from '../../constants.ts';
 
 const variantData = {
   card: {

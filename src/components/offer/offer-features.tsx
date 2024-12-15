@@ -1,11 +1,11 @@
 import {capitalizeFirstLetter} from '../../utils.ts';
-import {OfferDetailed} from '../../types/offers/offer-detailed.ts';
+import {DetailedOffer} from '../../types/offers/detailed-offer.ts';
 import {memo} from 'react';
 
 type OfferFeaturesProps = {
-    type: OfferDetailed['type'];
-    bedrooms: OfferDetailed['bedrooms'];
-    maxAdults: OfferDetailed['maxAdults'];
+    type: DetailedOffer['type'];
+    bedrooms: DetailedOffer['bedrooms'];
+    maxAdults: DetailedOffer['maxAdults'];
 };
 
 function OfferFeatures({type, bedrooms, maxAdults}: OfferFeaturesProps) {

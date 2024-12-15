@@ -1,7 +1,7 @@
 import axios, {AxiosError, AxiosInstance, InternalAxiosRequestConfig} from 'axios';
 import {getToken} from './token.ts';
 import {toast} from 'react-toastify';
-import {DetailMessageType, SERVER_MINIMAL_ERROR_CODE, shouldDisplayError} from './error-handle.ts';
+import {DetailedMessageType, SERVER_MINIMAL_ERROR_CODE, shouldDisplayError} from './error-handle.ts';
 
 const BACKEND_URL = 'https://14.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
@@ -27,12 +27,12 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.response.use(
     (response) => response,
-    (error: AxiosError<DetailMessageType>) => {
+    (error: AxiosError<DetailedMessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
 
         if (error.response.status >= SERVER_MINIMAL_ERROR_CODE) {
 
-          toast.error('Ой-ой! Ошибка соединения с сервером. Сервер не доступен!');
+          toast.error('Нет соединения с сервером!');
 
         } else if (error.response.data.details.length) {
           error.response.data.details.map((property) => {

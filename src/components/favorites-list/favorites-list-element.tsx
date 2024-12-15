@@ -1,21 +1,21 @@
-import {OffersShort} from '../../types/offers/offer-short.ts';
+import {BriefOffers} from '../../types/offers/brief-offer.ts';
 import OfferCard from '../offer/offer-card/offer-card.tsx';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
-import {getCityObjectByName} from '../../utils.ts';
+import {AppRoute} from '../../constants.ts';
+import {getCityByName} from '../../utils.ts';
 import {useAppDispatch} from '../../hooks/services/redux.ts';
 import {setActiveCity} from '../../store/data-process/data-process.slice.ts';
 import {useCallback} from 'react';
 
 type FavoritesListElementProps = {
-  favoritesAtCity: OffersShort;
+  favoritesAtCity: BriefOffers;
   cityName: string;
 }
 
 function FavoritesListElement({favoritesAtCity, cityName}: FavoritesListElementProps): JSX.Element {
   const dispatch = useAppDispatch();
   const handleLinkOnClick = useCallback (() => {
-    const city = getCityObjectByName(cityName);
+    const city = getCityByName(cityName);
     if (city) {
       dispatch(setActiveCity(city));
     }

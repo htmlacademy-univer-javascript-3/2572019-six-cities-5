@@ -1,22 +1,22 @@
-import PremiumSign from '../../premium-sign/premium-sign.tsx';
-import BookmarkButton from '../../bookmark-button/bookmark-button.tsx';
-import Rating from '../../rating/rating.tsx';
-import OfferFeatures from '../offer-features.tsx';
-import OfferPrice from '../offer-price.tsx';
-import OfferInside from '../offer-inside.tsx';
-import OfferHost from '../offer-host.tsx';
-import OfferReviews from '../offer-reviews.tsx';
-import {OfferDetailed} from '../../../types/offers/offer-detailed.ts';
-import OfferGallery from '../offer-gallery.tsx';
-import {toggleOfferFavoriteStatus} from '../../../store/api-actions.ts';
-import {useAppDispatch} from '../../../hooks/services/redux.ts';
+import PremiumSign from '../premium-sign.tsx';
+import BookmarkButton from '../bookmark-button.tsx';
+import Rating from '../rating.tsx';
+import OfferFeatures from './offer-features.tsx';
+import OfferPrice from './offer-price.tsx';
+import OfferInside from './offer-inside.tsx';
+import OfferHost from './offer-host.tsx';
+import OfferReviews from './offer-reviews.tsx';
+import {DetailedOffer} from '../../types/offers/detailed-offer.ts';
+import OfferGallery from './offer-gallery.tsx';
+import {toggleOfferFavoriteStatus} from '../../store/api-actions.ts';
+import {useAppDispatch} from '../../hooks/services/redux.ts';
 import {memo} from 'react';
 
-type OfferDetailProps = {
-  offer: OfferDetailed;
+type OfferDetailsProps = {
+  offer: DetailedOffer;
 }
 
-function OfferDetail({offer: currentOffer} : OfferDetailProps) : JSX.Element {
+function OfferDetails({offer: currentOffer} : OfferDetailsProps) : JSX.Element {
   const dispatch = useAppDispatch();
   const handleButtonClick = () => {
     dispatch(toggleOfferFavoriteStatus(currentOffer));
@@ -51,4 +51,4 @@ function OfferDetail({offer: currentOffer} : OfferDetailProps) : JSX.Element {
   );
 }
 
-export default memo(OfferDetail);
+export default memo(OfferDetails);

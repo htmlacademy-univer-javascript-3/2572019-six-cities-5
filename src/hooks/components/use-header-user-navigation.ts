@@ -2,16 +2,16 @@ import {useAuthorization} from '../services/use-authorization.ts';
 import {useAppDispatch, useAppSelector} from '../services/redux.ts';
 import {getUserData} from '../../store/user-process/user-process.selectors.ts';
 import {getFavoriteOffers} from '../../store/favorite-data-process/favorite-data-process.selectors.ts';
-import {getOfferDetailed} from '../../store/detailed-data-process/detailed-data-process.selectors.ts';
+import {getDetailedOffer} from '../../store/detailed-data-process/detailed-data-process.selectors.ts';
 import {useCallback} from 'react';
-import {fetchNearPlacesAction, fetchOfferAction, logoutAction} from '../../store/api-actions.ts';
+import {fetchNearbyOffersAction, fetchOfferAction, logoutAction} from '../../store/api-actions.ts';
 
 export function useHeaderUserNavigation() {
   const isAuthorized = useAuthorization();
   const dispatch = useAppDispatch();
   const userData = useAppSelector(getUserData);
   const favoriteOffers = useAppSelector(getFavoriteOffers);
-  const detailedOffer = useAppSelector(getOfferDetailed);
+  const detailedOffer = useAppSelector(getDetailedOffer);
 
   const handleLinkClick = useCallback(
     () => {
@@ -19,7 +19,7 @@ export function useHeaderUserNavigation() {
         .then(() => {
           if (detailedOffer?.id) {
             dispatch(fetchOfferAction(detailedOffer.id));
-            dispatch(fetchNearPlacesAction(detailedOffer.id));
+            dispatch(fetchNearbyOffersAction(detailedOffer.id));
           }
         });
     }, []);

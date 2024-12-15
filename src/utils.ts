@@ -1,7 +1,7 @@
-import {CityName, CityObject} from './const.ts';
+import {CityName, CityObject} from './constants.ts';
 import {City} from './types/city.ts';
 import {Reviews} from './types/review.ts';
-import {OffersShort} from './types/offers/offer-short.ts';
+import {BriefOffers} from './types/offers/brief-offer.ts';
 
 export function capitalizeFirstLetter(word: string) : string {
   return word.charAt(0).toUpperCase() + word.slice(1);
@@ -12,7 +12,7 @@ export const formatDate = (date: string) =>
     new Date(date)
   );
 
-export const getCityObjectByName = (cityName: string) : City | undefined => {
+export const getCityByName = (cityName: string) : City | undefined => {
   switch (cityName) {
     case CityName.Paris:
       return CityObject.Paris;
@@ -42,7 +42,7 @@ export function getFirstTenSortedReviews(allReviews: Reviews) {
     .slice(0, 10);
 }
 
-export function filterAndCategorizeFavorites(allFavorites: OffersShort) {
+export function filterAndCategorizeFavorites(allFavorites: BriefOffers) {
   const allAvailableCities = Object.values(CityName);
   return allAvailableCities
     .map((city) => (

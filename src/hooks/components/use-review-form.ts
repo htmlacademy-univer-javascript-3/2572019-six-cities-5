@@ -1,12 +1,12 @@
 import {useAppDispatch, useAppSelector} from '../services/redux.ts';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {postReviewAction} from '../../store/api-actions.ts';
-import {MAX_REVIEW_COMMENT_LENGTH, MIN_REVIEW_COMMENT_LENGTH} from '../../const.ts';
-import {getOfferDetailed} from '../../store/detailed-data-process/detailed-data-process.selectors.ts';
+import {MAX_REVIEW_COMMENT_LENGTH, MIN_REVIEW_COMMENT_LENGTH} from '../../constants.ts';
+import {getDetailedOffer} from '../../store/detailed-data-process/detailed-data-process.selectors.ts';
 
 export function useReviewForm() {
   const dispatch = useAppDispatch();
-  const offerId = useAppSelector(getOfferDetailed)?.id;
+  const offerId = useAppSelector(getDetailedOffer)?.id;
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(NaN);
   const [formSubmitting, setFormSubmitting] = useState(false);

@@ -1,5 +1,5 @@
 import {UserProcess} from '../../types/state.ts';
-import {AuthStatus, StoreNameSpace} from '../../const.ts';
+import {AuthStatus, NameStore} from '../../constants.ts';
 import {createSlice} from '@reduxjs/toolkit';
 import {fetchUserData, loginAction, logoutAction} from '../api-actions.ts';
 
@@ -9,7 +9,7 @@ const initialState: UserProcess = {
 };
 
 export const userProcess = createSlice({
-  name: StoreNameSpace.User,
+  name: NameStore.User,
   initialState,
   reducers: {},
   extraReducers(builder) {

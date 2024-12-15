@@ -1,5 +1,5 @@
-import {useRating} from '../../hooks/components/use-rating.ts';
-import {RatingVariants} from '../../types/variants.ts';
+import {useRating} from '../hooks/components/use-rating.ts';
+import {RatingVariants} from '../types/variants.ts';
 import {memo} from 'react';
 
 type RatingProps = {

@@ -1,33 +1,33 @@
 import {DataProcess} from '../../types/state.ts';
-import {CityObject, SortingOrder, StoreNameSpace} from '../../const.ts';
+import {CityObject, SortOption, NameStore} from '../../constants.ts';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {fetchOffersAction, toggleOfferFavoriteStatus} from '../api-actions.ts';
 import {City} from '../../types/city.ts';
-import {OfferShort, OffersShort} from '../../types/offers/offer-short.ts';
+import {BriefOffer, BriefOffers} from '../../types/offers/brief-offer.ts';
 import {Nullable} from '../../types/nullable.ts';
 
 const initialState: DataProcess = {
   activeCity: CityObject.Paris,
   offers: [],
   hoverCardId: null,
-  sortingOrder: SortingOrder.popular,
+  sortOption: SortOption.popular,
 };
 
 export const dataProcess = createSlice(
   {
-    name: StoreNameSpace.Data,
+    name: NameStore.Data,
     initialState,
     reducers: {
       setActiveCity: (state, action: PayloadAction<City>) => {
         state.activeCity = action.payload;
       },
-      setHoverCardId: (state, action: PayloadAction<Nullable<OfferShort['id']>>) => {
+      setHoverCardId: (state, action: PayloadAction<Nullable<BriefOffer['id']>>) => {
         state.hoverCardId = action.payload;
       },
-      setSortingOrder: (state, action: PayloadAction<SortingOrder>) => {
-        state.sortingOrder = action.payload;
+      setSortOption: (state, action: PayloadAction<SortOption>) => {
+        state.sortOption = action.payload;
       },
-      setOffers: (state, action: PayloadAction<OffersShort>) => {
+      setOffers: (state, action: PayloadAction<BriefOffers>) => {
         state.offers = action.payload;
       },
     },
@@ -46,4 +46,4 @@ export const dataProcess = createSlice(
   }
 );
 
-export const {setActiveCity, setHoverCardId, setSortingOrder, setOffers} = dataProcess.actions;
+export const {setActiveCity, setHoverCardId, setSortOption, setOffers} = dataProcess.actions;

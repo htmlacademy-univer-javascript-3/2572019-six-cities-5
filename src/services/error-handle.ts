@@ -3,7 +3,7 @@ import {AxiosResponse} from 'axios';
 
 export const SERVER_MINIMAL_ERROR_CODE = 500;
 
-export type DetailMessageType = {
+export type DetailedMessageType = {
   errorType: string;
   message: string;
   details: [{

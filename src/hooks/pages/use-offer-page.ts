@@ -1,20 +1,20 @@
 import {useAppDispatch, useAppSelector} from '../services/redux.ts';
 import {Points} from '../../types/point.ts';
-import {AppRoute, MAX_NEIGHBOURHOOD_POINTS_ON_MAP} from '../../const.ts';
+import {AppRoute, MAX_NEIGHBOURHOOD_POINTS_ON_MAP} from '../../constants.ts';
 import {RequestStatus} from '../../types/request-status.ts';
 import {redirectToRoute} from '../../store/action.ts';
 import {useEffect} from 'react';
-import {fetchNearPlacesAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions.ts';
+import {fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions.ts';
 import {useParams} from 'react-router-dom';
-import {getNearPlaces, getOfferDetailed} from '../../store/detailed-data-process/detailed-data-process.selectors.ts';
+import {getNearByOffers as getNearbyOffers, getDetailedOffer} from '../../store/detailed-data-process/detailed-data-process.selectors.ts';
 import {getRequestStatus} from '../../store/request-condition-process/request-condition-process.selectors.ts';
 
 export function useOfferPage() {
   const {id} = useParams();
   const dispatch = useAppDispatch();
 
-  const nearbyOffers = useAppSelector(getNearPlaces);
-  const currentOffer = useAppSelector(getOfferDetailed);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const currentOffer = useAppSelector(getDetailedOffer);
   const requestStatus = useAppSelector(getRequestStatus);
 
   const nearbyPoints: Points = nearbyOffers
@@ -29,7 +29,7 @@ export function useOfferPage() {
     window.scrollTo(0, 0);
     if (id) {
       dispatch(fetchOfferAction(id));
-      dispatch(fetchNearPlacesAction(id));
+      dispatch(fetchNearbyOffersAction(id));
       dispatch(fetchReviewsAction(id));
     }
   }, [id, dispatch]);

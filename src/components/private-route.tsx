@@ -1,7 +1,7 @@
 import {Navigate} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute} from '../constants.ts';
 import {PropsWithChildren, ReactNode} from 'react';
-import {useAuthorization} from '../../hooks/services/use-authorization.ts';
+import {useAuthorization} from '../hooks/services/use-authorization.ts';
 
 function PrivateRoute({children}: PropsWithChildren): ReactNode {
   const isAuthorized = useAuthorization();

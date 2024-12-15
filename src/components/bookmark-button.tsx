@@ -1,5 +1,5 @@
-import {useBookmarkButton} from '../../hooks/components/use-bookmark-button.ts';
-import {BookmarkButtonVariants} from '../../types/variants.ts';
+import {useBookmarkButton} from '../hooks/components/use-bookmark-button.ts';
+import {BookmarkButtonVariants} from '../types/variants.ts';
 import {memo} from 'react';
 
 type BookmarkButtonProps = {

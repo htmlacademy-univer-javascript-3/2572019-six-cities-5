@@ -1,11 +1,11 @@
-import Header from '../../components/header/header.tsx';
+import Header from '../components/header/header.tsx';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
-import FavoritesList from '../../components/favorites-list/favorites-list.tsx';
-import {useAppSelector} from '../../hooks/services/redux.ts';
-import {getFavoriteOffers} from '../../store/favorite-data-process/favorite-data-process.selectors.ts';
+import {AppRoute} from '../constants.ts';
+import FavoritesList from '../components/favorites-list/favorites-list.tsx';
+import {useAppSelector} from '../hooks/services/redux.ts';
+import {getFavoriteOffers} from '../store/favorite-data-process/favorite-data-process.selectors.ts';
 import classNames from 'classnames';
-import EmptyFavorites from '../../components/empty-favorites/empty-favorites.tsx';
+import EmptyFavorites from '../components/empty-favorites.tsx';
 
 function FavoritesPage() : JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);

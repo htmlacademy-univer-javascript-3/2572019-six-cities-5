@@ -1,14 +1,14 @@
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../../const.ts';
+import {AppRoute} from '../../../constants.ts';
 import {capitalizeFirstLetter} from '../../../utils.ts';
 
-type PlaceCardTitleProps = {
+type OfferCardTitleProps = {
   type: string;
   name: string;
   id: string;
 }
 
-function OfferCardTitle({ type, name, id } : PlaceCardTitleProps) : JSX.Element {
+function OfferCardTitle({ type, name, id } : OfferCardTitleProps) : JSX.Element {
   return (
     <>
       <h2 className="place-card__name">

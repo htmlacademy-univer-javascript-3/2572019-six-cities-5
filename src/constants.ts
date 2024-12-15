@@ -1,4 +1,4 @@
-import {OfferShort} from './types/offers/offer-short.ts';
+import {BriefOffer} from './types/offers/brief-offer.ts';
 import {City} from './types/city.ts';
 
 export enum CityName {
@@ -84,14 +84,7 @@ export enum APIRoute {
   Favorite = '/favorite',
 }
 
-export enum SortingOrder {
-  popular = 'Popular',
-  priceToHigh = 'Price: low to high',
-  priceToLow = 'Price: high to low',
-  topRated = 'Top rated first',
-}
-
-export enum StoreNameSpace {
+export enum NameStore {
   Data = 'DATA',
   User = 'USER',
   DetailedData = 'DETAILED',
@@ -99,11 +92,18 @@ export enum StoreNameSpace {
   FavoriteData = 'FAVORITE',
 }
 
-export const SortComparisons : Record<SortingOrder, (a: OfferShort, b: OfferShort) => number> = {
-  [SortingOrder.popular]: () => 0,
-  [SortingOrder.priceToHigh]: (a: OfferShort, b: OfferShort) => a.price - b.price,
-  [SortingOrder.priceToLow]: (a: OfferShort, b: OfferShort) => b.price - a.price,
-  [SortingOrder.topRated]: (a: OfferShort, b: OfferShort) => b.rating - a.rating,
+export enum SortOption {
+  popular = 'Popular',
+  priceToHigh = 'Price: low to high',
+  priceToLow = 'Price: high to low',
+  topRated = 'Top rated first',
+}
+
+export const SortComparison : Record<SortOption, (a: BriefOffer, b: BriefOffer) => number> = {
+  [SortOption.popular]: () => 0,
+  [SortOption.priceToHigh]: (a: BriefOffer, b: BriefOffer) => a.price - b.price,
+  [SortOption.priceToLow]: (a: BriefOffer, b: BriefOffer) => b.price - a.price,
+  [SortOption.topRated]: (a: BriefOffer, b: BriefOffer) => b.rating - a.rating,
 };
 
 export const URL_MARKER_DEFAULT = './img/pin.svg';

@@ -1,7 +1,7 @@
-import {OfferDetailed} from '../../types/offers/offer-detailed.ts';
+import {DetailedOffer} from '../../types/offers/detailed-offer.ts';
 
 type OfferInsideProps = {
-  offer: OfferDetailed;
+  offer: DetailedOffer;
 };
 
 function OfferInside({offer}: OfferInsideProps) {

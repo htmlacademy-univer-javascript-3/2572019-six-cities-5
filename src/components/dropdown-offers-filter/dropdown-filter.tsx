@@ -1,6 +1,6 @@
 import DropdownFilterOption from './dropdown-filter-option.tsx';
 import {useDropdownOffersFilter} from '../../hooks/components/use-dropdown-offers-filter.ts';
-import {SortingOrder} from '../../const.ts';
+import {SortOption} from '../../constants.ts';
 
 function DropdownFilter() {
   const {handleSortingOnClick, currentSortingOrder, dropdownIsOpen, setDropdownIsOpen} = useDropdownOffersFilter();
@@ -16,7 +16,7 @@ function DropdownFilter() {
       </span>
       {dropdownIsOpen &&
         <ul className="places__options places__options--custom places__options--opened">
-          {Object.values(SortingOrder).map((value) => (
+          {Object.values(SortOption).map((value) => (
             <DropdownFilterOption
               dropdownStateSetter={setDropdownIsOpen}
               sortingOption={value}

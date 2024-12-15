@@ -1,4 +1,4 @@
-import {CityName} from '../../const.ts';
+import {CityName} from '../constants.ts';
 
 type EmptyMainProps = {
   cityName: CityName;

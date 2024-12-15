@@ -1,8 +1,8 @@
-import Header from '../../components/header/header.tsx';
-import Map from '../../components/map/map.tsx';
-import OfferCardList from '../../components/offer/offer-card-list/offer-card-list.tsx';
-import OfferDetail from '../../components/offer/offer-detail/offer-detail.tsx';
-import {useOfferPage} from '../../hooks/pages/use-offer-page.ts';
+import Header from '../components/header/header.tsx';
+import Map from '../components/map.tsx';
+import OfferCardList from '../components/offer/offer-card-list/offer-card-list.tsx';
+import OfferDetails from '../components/offer/offer-details.tsx';
+import {useOfferPage} from '../hooks/pages/use-offer-page.ts';
 
 function OfferPage(): JSX.Element | null {
   const {currentOffer, nearbyPoints, nearbyOffers} = useOfferPage();
@@ -16,7 +16,7 @@ function OfferPage(): JSX.Element | null {
       <Header/>
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferDetail offer={currentOffer} />
+          <OfferDetails offer={currentOffer} />
           <Map
             city={currentOffer.city}
             points={[...nearbyPoints, {id: currentOffer.id, location: currentOffer.location}]}

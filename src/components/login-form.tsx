@@ -1,4 +1,4 @@
-import {useLoginForm} from '../../hooks/components/use-login-form.ts';
+import {useLoginForm} from '../hooks/components/use-login-form.ts';
 
 function LoginForm(): JSX.Element {
   const {handleSubmit, loginRef, passwordRef} = useLoginForm();

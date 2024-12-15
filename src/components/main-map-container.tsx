@@ -1,8 +1,8 @@
-import Map from '../map/map.tsx';
-import {useAppSelector} from '../../hooks/services/redux.ts';
-import {Points} from '../../types/point.ts';
-import {City} from '../../types/city.ts';
-import {getHoverCardId} from '../../store/data-process/data-process.selectors.ts';
+import Map from './map.tsx';
+import {useAppSelector} from '../hooks/services/redux.ts';
+import {Points} from '../types/point.ts';
+import {City} from '../types/city.ts';
+import {getHoverCardId} from '../store/data-process/data-process.selectors.ts';
 
 type MainMapContainerProps = {
   points: Points;

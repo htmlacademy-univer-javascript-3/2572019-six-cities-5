@@ -1,9 +1,9 @@
-import {OfferShort} from '../../../types/offers/offer-short.ts';
-import PremiumSign from '../../premium-sign/premium-sign.tsx';
-import BookmarkButton from '../../bookmark-button/bookmark-button.tsx';
+import {BriefOffer} from '../../../types/offers/brief-offer.ts';
+import PremiumSign from '../../premium-sign.tsx';
+import BookmarkButton from '../../bookmark-button.tsx';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../../const.ts';
-import Rating from '../../rating/rating.tsx';
+import {AppRoute} from '../../../constants.ts';
+import Rating from '../../rating.tsx';
 import OfferPrice from '../offer-price.tsx';
 import OfferCardTitle from './offer-card-title.tsx';
 import {useOfferCard} from '../../../hooks/components/use-offer-card.ts';
@@ -11,13 +11,13 @@ import {OfferCardVariants} from '../../../types/variants.ts';
 import {Nullable} from '../../../types/nullable.ts';
 import {memo} from 'react';
 
-type PlaceCardProps = {
-  offerInfo: OfferShort;
+type OfferCardProps = {
+  offerInfo: BriefOffer;
   variant: OfferCardVariants;
   onCardHover?: (id: Nullable<string>) => void;
 }
 
-function OfferCard({offerInfo, variant, onCardHover}: PlaceCardProps): JSX.Element {
+function OfferCard({offerInfo, variant, onCardHover}: OfferCardProps): JSX.Element {
   const {
     id,
     title,

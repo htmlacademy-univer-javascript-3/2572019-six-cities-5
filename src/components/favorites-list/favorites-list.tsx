@@ -1,10 +1,10 @@
-import {OffersShort} from '../../types/offers/offer-short.ts';
+import {BriefOffers} from '../../types/offers/brief-offer.ts';
 import FavoritesListElement from './favorites-list-element.tsx';
 import {Fragment} from 'react';
 import {filterAndCategorizeFavorites} from '../../utils.ts';
 
 type FavoritesListProps = {
-  allFavorites: OffersShort;
+  allFavorites: BriefOffers;
 }
 
 function FavoritesList({ allFavorites } : FavoritesListProps) : JSX.Element {

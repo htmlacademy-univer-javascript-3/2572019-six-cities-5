@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {StoreNameSpace} from '../../const.ts';
+import {NameStore} from '../../constants.ts';
 import {RequestStatus} from '../../types/request-status.ts';
 import {RequestProcess} from '../../types/state.ts';
 import {
-  fetchNearPlacesAction,
+  fetchNearbyOffersAction,
   fetchOfferAction,
   fetchOffersAction,
   fetchReviewsAction,
@@ -16,7 +16,7 @@ const initialState: RequestProcess = {
 
 export const requestConditionProcess = createSlice(
   {
-    name: StoreNameSpace.RequestCondition,
+    name: NameStore.RequestCondition,
     initialState,
     reducers: {
       setRequestStatus: (state, action: PayloadAction<RequestStatus>) => {
@@ -45,13 +45,13 @@ export const requestConditionProcess = createSlice(
           state.requestStatus = RequestStatus.Error;
         })
 
-        .addCase(fetchNearPlacesAction.fulfilled, (state,) => {
+        .addCase(fetchNearbyOffersAction.fulfilled, (state,) => {
           state.requestStatus = RequestStatus.Success;
         })
-        .addCase(fetchNearPlacesAction.pending, (state) => {
+        .addCase(fetchNearbyOffersAction.pending, (state) => {
           state.requestStatus = RequestStatus.Process;
         })
-        .addCase(fetchNearPlacesAction.rejected, (state) => {
+        .addCase(fetchNearbyOffersAction.rejected, (state) => {
           state.requestStatus = RequestStatus.Error;
         })
 

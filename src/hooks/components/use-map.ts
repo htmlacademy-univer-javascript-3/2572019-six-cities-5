@@ -3,7 +3,6 @@ import leaflet, {Map} from 'leaflet';
 import {Location} from '../../types/location.ts';
 import {Nullable} from '../../types/nullable.ts';
 
-
 type MapController = {
   mapRef: React.MutableRefObject<Nullable<HTMLElement>>;
   center: Location;

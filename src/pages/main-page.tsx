@@ -1,9 +1,9 @@
-import Header from '../../components/header/header.tsx';
-import CitiesTabs from '../../components/cities-tabs/cities-tabs.tsx';
-import OfferCardList from '../../components/offer/offer-card-list/offer-card-list.tsx';
-import {useMainPage} from '../../hooks/pages/use-main-page.ts';
-import MainMapContainer from '../../components/main-map-container/main-map-container.tsx';
-import EmptyMain from '../../components/empty-main/empty-main.tsx';
+import Header from '../components/header/header.tsx';
+import CitiesTabs from '../components/cities-tabs/cities-tabs.tsx';
+import OfferCardList from '../components/offer/offer-card-list/offer-card-list.tsx';
+import {useMainPage} from '../hooks/pages/use-main-page.ts';
+import MainMapContainer from '../components/main-map-container.tsx';
+import EmptyMain from '../components/empty-main.tsx';
 
 function MainPage(): JSX.Element {
   const {activeCity, offersByCity, points, offersIsEmpty, mainClassName} = useMainPage();

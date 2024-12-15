@@ -1,10 +1,10 @@
-import Header from '../../components/header/header.tsx';
-import {AppRoute} from '../../const.ts';
+import Header from '../components/header/header.tsx';
+import {AppRoute} from '../constants.ts';
 import {Navigate} from 'react-router-dom';
-import {getRandomCity} from '../../utils.ts';
-import {useAuthorization} from '../../hooks/services/use-authorization.ts';
-import LoginForm from '../../components/login-form/login-form.tsx';
-import LocationCityTab from '../../components/cities-tabs/location-city-tab.tsx';
+import {getRandomCity} from '../utils.ts';
+import {useAuthorization} from '../hooks/services/use-authorization.ts';
+import LoginForm from '../components/login-form.tsx';
+import LocationCityTab from '../components/cities-tabs/location-city-tab.tsx';
 import {ReactNode} from 'react';
 
 function LoginPage(): ReactNode {

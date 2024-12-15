@@ -1,6 +1,6 @@
 import {useAppSelector} from '../../hooks/services/redux.ts';
 import LocationCityTab from './location-city-tab.tsx';
-import {CityObject} from '../../const.ts';
+import {CityObject} from '../../constants.ts';
 import {City} from '../../types/city.ts';
 import {memo} from 'react';
 import {getActiveCity} from '../../store/data-process/data-process.selectors.ts';

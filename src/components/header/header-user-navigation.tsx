@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
+import {AppRoute} from '../../constants.ts';
 import {useHeaderUserNavigation} from '../../hooks/components/use-header-user-navigation.ts';
 
 function HeaderUserNavigation(): JSX.Element {

@@ -2,7 +2,6 @@ import {FormEvent, useRef} from 'react';
 import {useAppDispatch} from '../services/redux.ts';
 import {loginAction} from '../../store/api-actions.ts';
 
-
 export function useLoginForm() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);

@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import React from 'react';
 import {useAppDispatch} from '../../hooks/services/redux.ts';
-import {setSortingOrder} from '../../store/data-process/data-process.slice.ts';
-import {SortingOrder} from '../../const.ts';
+import {setSortOption} from '../../store/data-process/data-process.slice.ts';
+import {SortOption} from '../../constants.ts';
 
 type DropdownFilterOptionProps = {
-  sortingOption: SortingOrder;
+  sortingOption: SortOption;
   isActive: boolean;
   dropdownStateSetter: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -15,7 +15,7 @@ function DropdownFilterOption({sortingOption, isActive, dropdownStateSetter} : D
   const className = classNames('places__option', {'places__option--active' : isActive});
   const handleSortingOptionOnClick = () => {
     dropdownStateSetter((state) => !state);
-    dispatch(setSortingOrder(sortingOption));
+    dispatch(setSortOption(sortingOption));
   };
 
   return (
